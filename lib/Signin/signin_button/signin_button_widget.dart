@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Signin/signin_button/signin_controller.dart';
 import 'package:goals_lite/my_colors.dart';
-import 'authentication_provider.dart';
 
 class SigninButtonWidget extends StatelessWidget {
   final String loginProvider;
+  SignIn signin = SignIn();
 
   TextStyle textStyle = TextStyle(fontSize: 16);
 
@@ -15,8 +16,11 @@ class SigninButtonWidget extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: black3),
       onPressed: () => {
-        // context.read<AuthenticationProvider>().signInWithApple()
-
+        signin.onPressAppleButton(onResult: (st, err) {
+          // if(st){
+          //   _controller.pushToApp();
+          // }
+        })
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => DashboardPage()),
