@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'login_button/login_button_widget.dart';
+import 'signin_button/signin_button_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SigninPageState createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   SizedBox(height: 40),
-                  LoginButtonWidget('Apple'),
+                  SigninButtonWidget('Apple'),
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Login/login_view.dart';
+import 'Signin/signin_view.dart';
 import 'my_colors.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           button: TextStyle(fontSize: 16.0, color: black2),
         ),
       ),
-      home: LoginPage(),
+      home: SigninPage(),
     );
   }
 }
