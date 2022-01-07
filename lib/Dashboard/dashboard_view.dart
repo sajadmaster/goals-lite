@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
+import 'dashboard_empty_view.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -32,12 +34,5 @@ class _DashboardPageState extends State<DashboardPage> {
         child: DashboardEmptyContent(),
       ),
     );
-  }
-}
-
-class DashboardEmptyContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
