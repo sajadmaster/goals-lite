@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Dashboard/dashboard.dart';
 import 'package:goals_lite/Signin/signin_button/signin_controller.dart';
-import 'package:goals_lite/my_colors.dart';
+import 'package:goals_lite/_shared/my_colors.dart';
 
 class SigninButtonWidget extends StatelessWidget {
   final String loginProvider;
@@ -16,15 +15,7 @@ class SigninButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: black3),
-      onPressed: () => {
-        signin.onPressAppleButton(context, onResult: (st, err) {
-          if (st) {
-            print('Apple Login Result: $st');
-          } else {
-            print("Apple Login Error: $err");
-          }
-        })
-      },
+      onPressed: () => {signin.onPressAppleButton(context)},
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 15),
         child: Row(

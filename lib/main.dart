@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_view.dart';
 import 'Signin/signin_view.dart';
-import 'my_colors.dart';
+import '_shared/my_colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
           button: TextStyle(fontSize: 16.0, color: black2),
         ),
       ),
-      home: SigninPage(),
+      home: DashboardPage(),
     );
   }
 }
