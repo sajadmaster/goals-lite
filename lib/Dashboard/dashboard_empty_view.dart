@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/CreateGoal/create_goal_view.dart';
+import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DashboardEmptyContent extends StatelessWidget {
   @override
@@ -25,7 +28,12 @@ class DashboardEmptyContent extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-              onPressed: () => {print('btn')},
+              onPressed: () => {
+                    showBarModalBottomSheet(
+                      context: context,
+                      builder: (context) => CreateGoalPopUp(),
+                    )
+                  },
               child: Text(
                 'Create Goal',
                 style: TextStyle(fontWeight: FontWeight.bold),
