@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_view.dart';
 import 'Signin/signin_view.dart';

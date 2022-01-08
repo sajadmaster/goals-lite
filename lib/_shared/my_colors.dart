@@ -7,3 +7,6 @@ const Color black3 = Color(0xFF050708);
 // Blue
 const Color blue1 = Color(0xFF11538D);
 const Color blue2 = Color(0xFF0F4C81);
+
+// Red
+const Color red4 = Color(0xFFF5413D);
