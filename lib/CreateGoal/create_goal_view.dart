@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
 class CreateGoalPopUp extends StatelessWidget {
@@ -41,7 +42,10 @@ class CreateGoalPopUp extends StatelessWidget {
               children: [
                 TextButton(onPressed: () => {}, child: Text('Close')),
                 SizedBox(width: 20),
-                ElevatedButton(onPressed: () => {}, child: Text('Save')),
+                RoundElevatedButton(
+                  buttonText: 'Save',
+                  onPress: () {},
+                ),
               ],
             ),
           ],

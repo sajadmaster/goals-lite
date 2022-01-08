@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/CreateGoal/create_goal_view.dart';
+import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -27,21 +28,15 @@ class DashboardEmptyContent extends StatelessWidget {
               ],
             ),
           ),
-          ElevatedButton(
-              onPressed: () => {
-                    showBarModalBottomSheet(
-                      context: context,
-                      builder: (context) => CreateGoalPopUp(),
-                    )
-                  },
-              child: Text(
-                'Create Goal',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0))))),
+          RoundElevatedButton(
+            buttonText: 'Create Goal',
+            onPress: () {
+              showBarModalBottomSheet(
+                context: context,
+                builder: (context) => CreateGoalPopUp(),
+              );
+            },
+          ),
           const SizedBox(height: 100),
         ],
       ),
