@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
-import 'package:goals_lite/models/goal_model.dart';
-import 'create_goal_controller.dart';
+import 'goal.dart';
 
 class CreateGoalPopUp extends StatefulWidget {
   const CreateGoalPopUp({Key? key}) : super(key: key);
@@ -65,19 +64,17 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () =>
-                          {CreateGoalController.closePopup(context)},
+                      onPressed: () => {Navigator.pop(context)},
                       child: const Text('Close')),
                   const SizedBox(width: 20),
                   RoundElevatedButton(
                     buttonText: 'Save',
                     onPress: () async {
-                      GoalModel goalModel = GoalModel(
+                      Goal goal = Goal(
                           goalName: goalNameController.text,
                           goalUnit: goalUnitController.text);
 
-                      String response =
-                          await CreateGoalController.SaveGoal(goalModel);
+                      String response = await Goal.SaveGoal(goal);
                       print('response $response');
 
                       if (response == emptyTextFieldErr) {
@@ -85,7 +82,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                           isErrorVisible = true;
                         });
                       } else if (response == success) {
-                        CreateGoalController.closePopup(context);
+                        Navigator.pop(context);
                       }
                     },
                   ),
