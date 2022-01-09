@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           button: TextStyle(fontSize: 16.0, color: black2),
         ),
       ),
-      home: SigninPage(),
+      home: DashboardPage(),
     );
   }
 }

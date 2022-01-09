@@ -71,13 +71,14 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                   const SizedBox(width: 20),
                   RoundElevatedButton(
                     buttonText: 'Save',
-                    onPress: () {
+                    onPress: () async {
                       GoalModel goalModel = GoalModel(
                           goalName: goalNameController.text,
                           goalUnit: goalUnitController.text);
 
-                      Future<String> response =
-                          CreateGoalController.SaveGoal(goalModel);
+                      String response =
+                          await CreateGoalController.SaveGoal(goalModel);
+                      print('response $response');
 
                       if (response == emptyTextFieldErr) {
                         setState(() {
