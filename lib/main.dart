@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_view.dart';
 import 'Signin/signin_view.dart';
 import '_shared/my_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
           button: TextStyle(fontSize: 16.0, color: black2),
         ),
       ),
-      home: DashboardPage(),
+      home: SigninPage(),
     );
   }
 }

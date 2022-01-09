@@ -6,7 +6,6 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignIn {
   onPressAppleButton(context) async {
-    await Firebase.initializeApp();
     final FirebaseAuth auth = FirebaseAuth.instance;
 
     SignInWithApple.getAppleIDCredential(
