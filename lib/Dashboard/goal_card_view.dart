@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Record/record_column_widget.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/_shared/three_dot_dropdown.dart';
 
 class GoalCard extends StatelessWidget {
-  const GoalCard({Key? key}) : super(key: key);
+  const GoalCard();
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,7 @@ class GoalCard extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  IconButton(
-                    onPressed: () => {},
-                    icon: Icon(Icons.more_vert),
-                  )
+                  ThreeVertDots(context),
                 ],
               ),
             ),
@@ -46,25 +45,6 @@ class GoalCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class RecordColumn extends StatelessWidget {
-  RecordColumn();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          '8.5',
-          style: TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold, color: black2),
-        ),
-        SizedBox(height: 2),
-        Text('Today (km)'),
-      ],
     );
   }
 }

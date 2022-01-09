@@ -5,14 +5,14 @@ import 'package:goals_lite/_shared/my_constants.dart';
 import 'goal.dart';
 
 class CreateGoalPopUp extends StatefulWidget {
-  const CreateGoalPopUp({Key? key}) : super(key: key);
+  CreateGoalPopUp();
 
   @override
   _CreateGoalPopUpState createState() => _CreateGoalPopUpState();
 }
 
 class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
-  var isErrorVisible = false;
+  bool isErrorVisible = false;
   static TextEditingController goalNameController = TextEditingController();
   static TextEditingController goalUnitController = TextEditingController();
 
