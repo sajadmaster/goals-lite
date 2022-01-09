@@ -74,7 +74,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                           goalName: goalNameController.text,
                           goalUnit: goalUnitController.text);
 
-                      String response = await Goal.SaveGoal(goal);
+                      String response = await Goal.AddGoal(goal);
                       print('response $response');
 
                       if (response == emptyTextFieldErr) {

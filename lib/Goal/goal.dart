@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 
 class Goal {
@@ -11,8 +12,8 @@ class Goal {
   get getGoalUnit => this.goalUnit;
   set setGoalUnit(goalUnit) => this.goalUnit = goalUnit;
 
-  // Save Goal
-  static Future<String> SaveGoal(Goal goal) async {
+  // Add Goal
+  static Future<String> AddGoal(Goal goal) async {
     if (goal.getGoalName == '' || goal.getGoalUnit == '') {
       return emptyTextFieldErr;
     }
@@ -26,5 +27,19 @@ class Goal {
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Goal: $error"));
     return success;
+  }
+
+  dynamic data;
+  static Future<dynamic> GetGoalList() async {
+    DocumentReference goalsDoc = FirebaseFirestore.instance
+        .collection('goals')
+        .doc('4iTEG6HYlfF0xKwXyO1X');
+
+    await goalsDoc.get().then<dynamic>((DocumentSnapshot snapshot) async {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+      print("Sajad Goal Name ${data['goal_name']}");
+      print("Sajad Goal Unit ${data['goal_unit']}");
+    });
   }
 }
