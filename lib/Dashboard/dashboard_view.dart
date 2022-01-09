@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
-import 'dashboard_empty_view.dart';
+import 'dashboard_no_content_view.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: DashboardEmptyContent(),
+        child: DashboardWithContent(),
       ),
     );
   }

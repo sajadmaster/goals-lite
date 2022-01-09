@@ -3,7 +3,7 @@ import 'package:goals_lite/Goal/create_goal_view.dart';
 import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class DashboardEmptyContent extends StatelessWidget {
+class DashboardNoContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
