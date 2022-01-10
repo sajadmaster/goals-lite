@@ -18,7 +18,7 @@ Widget ThreeVertDots(context) {
           );
         } else if (value == 2) {
           print('sajad value 2');
-          Goal.GetGoalList();
+          Goal.GetGoalsList();
         }
       },
       itemBuilder: (context) => [

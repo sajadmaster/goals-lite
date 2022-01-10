@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
+import 'dashboard_controller.dart';
 import 'dashboard_no_content_view.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: DashboardWithContent(),
+        child: DoashboardBody(),
       ),
     );
   }

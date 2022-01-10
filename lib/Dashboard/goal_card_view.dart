@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/record_column_widget.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/three_dot_dropdown.dart';
 
 class GoalCard extends StatelessWidget {
-  const GoalCard();
+  final Goal goal;
+  const GoalCard(this.goal);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +20,8 @@ class GoalCard extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Run',
-                    style: TextStyle(
-                        color: black2,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+                    goal.goalName,
+                    style: TextStyle(color: black2, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
                   ThreeVertDots(context),
@@ -34,11 +33,11 @@ class GoalCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: Row(
                 children: [
-                  RecordColumn(),
+                  RecordColumn(goal),
                   Spacer(),
-                  RecordColumn(),
+                  RecordColumn(goal),
                   Spacer(),
-                  RecordColumn(),
+                  RecordColumn(goal),
                 ],
               ),
             )

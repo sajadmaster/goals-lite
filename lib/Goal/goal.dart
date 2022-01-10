@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 
@@ -14,32 +15,25 @@ class Goal {
 
   // Add Goal
   static Future<String> AddGoal(Goal goal) async {
+    String userID = FirebaseAuth.instance.currentUser!.uid;
+    print('sajad userID:' + userID);
+
     if (goal.getGoalName == '' || goal.getGoalUnit == '') {
       return emptyTextFieldErr;
     }
     // Firestore Add Goal
     CollectionReference goals = FirebaseFirestore.instance.collection('goals');
-    await goals
-        .add({
-          'goalName': goal.getGoalName,
-          'goalUnit': goal.getGoalUnit,
-        })
-        .then((value) => print("value $value"))
-        .catchError((error) => print("Failed to add Goal: $error"));
+    await goals.add({'goalName': goal.getGoalName, 'goalUnit': goal.getGoalUnit, 'userID': userID}).then((value) => print("value $value")).catchError((error) => print("Failed to add Goal: $error"));
     return success;
   }
 
-  dynamic data;
-  static Future<dynamic> GetGoalList() async {
-    DocumentReference goalsDoc = FirebaseFirestore.instance
-        .collection('goals')
-        .doc('4iTEG6HYlfF0xKwXyO1X');
+  static Future<List<Goal>> GetGoalsList() async {
+    String userID = FirebaseAuth.instance.currentUser!.uid;
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection("goals").where('userID', isEqualTo: userID).get();
+    List<Goal> goalsList = querySnapshot.docs.map((doc) => Goal(goalName: doc["goalName"], goalUnit: doc['goalUnit'])).toList();
+    print('sajad goalsList length ${goalsList.length}');
+    // print('sajad goalsList getGoalName ${goalsList.first.getGoalName}');
 
-    await goalsDoc.get().then<dynamic>((DocumentSnapshot snapshot) async {
-      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-
-      print("Sajad Goal Name ${data['goal_name']}");
-      print("Sajad Goal Unit ${data['goal_unit']}");
-    });
+    return goalsList;
   }
 }

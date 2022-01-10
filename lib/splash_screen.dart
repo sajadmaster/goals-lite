@@ -12,23 +12,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    WidgetsFlutterBinding.ensureInitialized();
+    Firebase.initializeApp();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
-          headline2: TextStyle(
-              fontSize: 24.0, fontWeight: FontWeight.bold, color: black2),
+          headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: black2),
           button: TextStyle(fontSize: 16.0, color: black2),
         ),
       ),
       home: SigninPage(),
     );
-  }
-
-  @override
-  void initState() {
-    WidgetsFlutterBinding.ensureInitialized();
-    Firebase.initializeApp();
-    super.initState();
   }
 }

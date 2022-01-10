@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'signin_button/signin_button_widget.dart';
 
@@ -44,6 +45,14 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                   SizedBox(height: 40),
                   SigninButtonWidget('Apple'),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DashboardPage()),
+                        );
+                      },
+                      child: Text('Move to Dashboard')),
                 ],
               ),
             ),
