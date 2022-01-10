@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Dashboard/dashboard_view.dart';
+import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignIn {
