@@ -78,11 +78,11 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                       String response = await Goal.add(goal);
                       print('response $response');
 
-                      if (response == emptyTextFieldErr) {
+                      if (response == EMPTY_TEXTFIELD_ERR) {
                         setState(() {
                           isErrorVisible = true;
                         });
-                      } else if (response == success) {
+                      } else if (response == SUCCESS) {
                         Navigator.pop(context);
                       }
                     },

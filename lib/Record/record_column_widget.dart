@@ -12,7 +12,8 @@ class RecordColumn extends StatelessWidget {
       children: [
         Text(
           '8.5',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: black2),
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: black2),
         ),
         SizedBox(height: 2),
         Text('Today (${goal.getGoalUnit})'),

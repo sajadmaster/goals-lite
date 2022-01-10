@@ -44,16 +44,8 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
             child: ListView.builder(
                 itemCount: widget.goalsList.length,
                 itemBuilder: (context, index) {
-                  return GoalCard(widget.goalsList[index]);
+                  return GoalCard(goal: widget.goalsList[index]);
                 }),
-
-            // child: ListView(
-            //   children: <Widget>[
-            //     GoalCard(),
-            //     SizedBox(height: 10),
-            //     GoalCard(),
-            //   ],
-            // ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),

@@ -20,12 +20,15 @@ class _DoashboardBodyState extends State<DoashboardBody> {
           if (gl.hasData) {
             List<Goal>? goalsList = gl.data;
             if (goalsList != null && goalsList.isNotEmpty) {
+              print('goalsList length is ${goalsList.length}');
               return DashboardWithContent(goalsList);
             } else {
               return DashboardNoContent();
             }
           } else if (gl.hasError) {
-            print('hasError: ${gl.error}');
+            // return DashboardNoContent();
+            print('Sajad hasError: ${gl.error}');
+            return Text('${gl.error}');
           }
           return Container(); // before loading the results, show empty white container
         },

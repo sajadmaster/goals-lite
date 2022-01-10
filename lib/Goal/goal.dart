@@ -23,7 +23,7 @@ class Goal {
     print('sajad userID:' + userID);
 
     if (goal.getGoalName == '' || goal.getGoalUnit == '') {
-      return emptyTextFieldErr;
+      return EMPTY_TEXTFIELD_ERR;
     }
     // Firestore Add Goal
     CollectionReference goals = FirebaseFirestore.instance.collection('goals');
@@ -35,18 +35,18 @@ class Goal {
         })
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Goal: $error"));
-    return success;
+    return SUCCESS;
   }
 
-  static Future<void> delete(Goal goal) {
+  static Future<String> delete(Goal goal) {
     print('Request deleting goalID: ${goal.getGoalID}');
     CollectionReference goalsCollection =
         FirebaseFirestore.instance.collection('goals');
     return goalsCollection
         .doc(goal.getGoalID)
         .delete()
-        .then((value) => print("Goal Deleted"))
-        .catchError((error) => print("Failed to delete goal: $error"));
+        .then((value) => SUCCESS)
+        .catchError((error) => FAILED_DELETE_GOAL);
   }
 
   static Future<List<Goal>> getGoalsList() async {
@@ -62,9 +62,6 @@ class Goal {
             goalUnit: doc['goalUnit']))
         .toList();
     print('sajad goalsList length ${goalsList.length}');
-    print('Sajad doc id : ${goalsList[1].getGoalID}');
-    print('Sajad goal name: ${goalsList[1].getGoalName}');
-    // print('sajad goalsList getGoalName ${goalsList.first.getGoalName}');
 
     return goalsList;
   }
