@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/add_data_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 Widget ThreeVertDots(context) {
@@ -23,14 +24,14 @@ Widget ThreeVertDots(context) {
       itemBuilder: (context) => [
             PopupMenuItem(
               child: Text(
-                "Add Data",
+                ADD_DATA,
                 style: TextStyle(color: black2),
               ),
               value: 1,
             ),
             PopupMenuItem(
               child: Text(
-                "Delete Goal",
+                DELETE_GOAL,
                 style: TextStyle(color: red4),
               ),
               value: 2,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 
 class AddDataPopup extends StatefulWidget {
   AddDataPopup();
@@ -42,7 +43,7 @@ class _AddDataPopupState extends State<AddDataPopup> {
                 style: TextStyle(fontSize: 24),
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Enter data',
+                  labelText: ENTER_DATA_HERE,
                   hintText: '0.0',
                   suffixText: 'hr',
                 ),
@@ -51,7 +52,7 @@ class _AddDataPopupState extends State<AddDataPopup> {
               Visibility(
                 visible: isErrorVisible,
                 child: Text(
-                  'Error: Please enter data.',
+                  ERROR_PLEASE_ENTER_DATA_HERE,
                   style: TextStyle(color: red4),
                 ),
               ),
@@ -61,10 +62,10 @@ class _AddDataPopupState extends State<AddDataPopup> {
                 children: [
                   TextButton(
                       onPressed: () => {Navigator.pop(context)},
-                      child: const Text('Close')),
+                      child: const Text(CLOSE)),
                   const SizedBox(width: 20),
                   RoundElevatedButton(
-                    buttonText: 'Save',
+                    buttonText: SAVE,
                     onPress: () async {},
                   ),
                 ],
@@ -86,7 +87,7 @@ Widget DateRow() {
       ),
       SizedBox(width: 5),
       Text(
-        'Date',
+        DATE,
         style: TextStyle(fontSize: 18),
       ),
       Spacer(),
@@ -107,7 +108,7 @@ Widget TimeRow() {
       ),
       SizedBox(width: 5),
       Text(
-        'Time',
+        TIME,
         style: TextStyle(fontSize: 18),
       ),
       Spacer(),

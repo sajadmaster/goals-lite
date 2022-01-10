@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 import 'signin_button/signin_button_widget.dart';
 
 class SigninPage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _SigninPageState extends State<SigninPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Welcome to Goals!',
+                    WELIME_TO_GOALS_LITE,
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   SizedBox(height: 40),

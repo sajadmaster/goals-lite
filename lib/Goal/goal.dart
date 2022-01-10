@@ -21,8 +21,8 @@ class Goal {
     CollectionReference goals = FirebaseFirestore.instance.collection('goals');
     await goals
         .add({
-          'goal_name': goal.getGoalName,
-          'goal_unit': goal.getGoalUnit,
+          'goalName': goal.getGoalName,
+          'goalUnit': goal.getGoalUnit,
         })
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Goal: $error"));

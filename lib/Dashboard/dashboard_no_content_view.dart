@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/create_goal_view.dart';
 import 'package:goals_lite/_shared/button_round_elevated.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DashboardNoContent extends StatelessWidget {
@@ -21,14 +22,14 @@ class DashboardNoContent extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Center(
-                  child: Text('Set your goal and get started!',
+                  child: Text(SET_GOAL_GET_STARTED,
                       style: TextStyle(fontSize: 16)),
                 ),
               ],
             ),
           ),
           RoundElevatedButton(
-            buttonText: 'Create Goal',
+            buttonText: CREATE_GOAL,
             onPress: () {
               showBarModalBottomSheet(
                 context: context,

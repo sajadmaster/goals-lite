@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 import 'goal.dart';
 
 class CreateGoalPopUp extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Create a goal',
+                CREATE_A_GOAL,
                 style: TextStyle(
                     color: blue2, fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -39,8 +40,8 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                 controller: goalNameController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Goal name',
-                  helperText: 'ex: Run, Study, Swim',
+                  labelText: GOAL_NAME,
+                  helperText: EX_RUN_STUDY_SWIM,
                 ),
               ),
               const SizedBox(height: 20),
@@ -48,14 +49,14 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                 controller: goalUnitController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: 'Goal unit',
-                    helperText: 'ex: km (kilometer), mi (mile), hr (hour)'),
+                    labelText: GOAL_UNIT,
+                    helperText: EX_KM_KILOMETER_MI_MILE),
               ),
               const SizedBox(height: 5),
               Visibility(
                 visible: isErrorVisible,
                 child: Text(
-                  'Error: Goal name or goal unit is empty.',
+                  ERROR_GOAL_NAME_OR_GOAL_UNIT_EMPTY,
                   style: TextStyle(color: red4),
                 ),
               ),
@@ -65,10 +66,10 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                 children: [
                   TextButton(
                       onPressed: () => {Navigator.pop(context)},
-                      child: const Text('Close')),
+                      child: const Text(CLOSE)),
                   const SizedBox(width: 20),
                   RoundElevatedButton(
-                    buttonText: 'Save',
+                    buttonText: SAVE,
                     onPress: () async {
                       Goal goal = Goal(
                           goalName: goalNameController.text,

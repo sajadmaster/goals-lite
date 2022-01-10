@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/goal_card_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 
 class DashboardWithContent extends StatefulWidget {
   const DashboardWithContent({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Text(
-            'Goals',
+            GOALS,
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold, color: black2),
           ),
