@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -22,10 +21,6 @@ class SignIn {
 
       auth.signInWithCredential(credentialFirebase).then((userObj) async {
         print('sajad Firebase user uid: ${userObj.user!.uid}');
-        // print('sajad Firebase user displayName: ${userObj.user!.displayName}');
-        // print('sajad Firebase user email: ${userObj.user!.email}');
-        // print('sajad Firebase user isAnonymous: ${userObj.user!.isAnonymous}');
-        // print('sajad Firebase user phoneNumber: ${userObj.user!.phoneNumber}');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DashboardPage()),
