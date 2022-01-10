@@ -9,7 +9,7 @@ class DoashboardBody extends StatefulWidget {
 }
 
 class _DoashboardBodyState extends State<DoashboardBody> {
-  final Future<List<Goal>> goalsListFuture = Goal.GetGoalsList();
+  final Future<List<Goal>> goalsListFuture = Goal.getGoalsList();
 
   @override
   Widget build(BuildContext context) {

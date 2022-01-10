@@ -20,8 +20,8 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
   @override
   void initState() {
     for (int i = 0; i < widget.goalsList.length; i++) {
-      String temp = widget.goalsList[i].getGoalName;
-      print('Sajad Goal Name: $temp');
+      // String temp = widget.goalsList[i].getGoalName;
+      // print('Sajad Goal Name: $temp');
     }
     super.initState();
   }
@@ -36,7 +36,8 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
         children: <Widget>[
           Text(
             GOALS,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: black2),
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: black2),
           ),
           SizedBox(height: 9),
           Expanded(

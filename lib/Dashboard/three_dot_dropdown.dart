@@ -5,7 +5,7 @@ import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-Widget ThreeVertDots(context) {
+Widget ThreeVertDots(context, goal) {
   return PopupMenuButton(
       icon: Icon(Icons.more_vert),
       onSelected: (value) {
@@ -18,7 +18,7 @@ Widget ThreeVertDots(context) {
           );
         } else if (value == 2) {
           print('sajad value 2');
-          Goal.GetGoalsList();
+          Goal.delete(goal);
         }
       },
       itemBuilder: (context) => [

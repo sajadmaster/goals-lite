@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/record_column_widget.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
-import 'package:goals_lite/_shared/three_dot_dropdown.dart';
+import 'package:goals_lite/Dashboard/three_dot_dropdown.dart';
 
 class GoalCard extends StatelessWidget {
   final Goal goal;
-  const GoalCard(this.goal);
+  GoalCard(this.goal);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,13 @@ class GoalCard extends StatelessWidget {
                 children: [
                   Text(
                     goal.goalName,
-                    style: TextStyle(color: black2, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: black2,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  ThreeVertDots(context),
+                  ThreeVertDots(context, goal),
                 ],
               ),
             ),
