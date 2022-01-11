@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/Record/record.dart';
+import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
@@ -8,8 +10,6 @@ import 'package:intl/intl.dart';
 class AddRecordPopup extends StatefulWidget {
   AddRecordPopup();
   DateTime date = DateTime.now();
-  final dateFormat = DateFormat('yyyy-MM-dd hh:mm');
-  TimeOfDay timeOfDay = TimeOfDay.now();
 
   @override
   _AddRecordPopupState createState() => _AddRecordPopupState();
@@ -43,19 +43,18 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                   title: DATE,
                   dateFormat: DateFormat.yMMMd().format(widget.date),
                   onTapped: () {
-                    print("Date Row clicked");
                     datePicker(context);
                   }),
               // Time Row
               MyRow(
                   iconData: Icons.access_time,
                   title: TIME,
-                  dateFormat: widget.timeOfDay.format(context),
+                  dateFormat: DateFormat.Hm().format(widget.date),
                   onTapped: () {
-                    print("Time Row clicked");
                     timePicker(context);
                   }),
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
+              // Enter data
               TextFormField(
                 controller: recordValueController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -79,13 +78,30 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  // Close button
                   TextButton(onPressed: () => {Navigator.pop(context)}, child: const Text(CLOSE)),
                   const SizedBox(width: 20),
+                  // Save button
                   RoundElevatedButton(
                     buttonText: SAVE,
                     onPress: () async {
-                      Record record = Record(dateTime: '2022-01-13', value: double.parse(recordValueController.text));
-                      Record.add(record);
+                      // Save record
+                      if (recordValueController.text != '') {
+                        Record record = Record(
+                            dateTime: widget.date, value: double.parse(recordValueController.text));
+                        await Record.add(record);
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                            transitionDuration: Duration.zero,
+                          ),
+                        );
+                      } else {
+                        setState(() {
+                          isErrorVisible = true;
+                        });
+                      }
                     },
                   ),
                 ],
@@ -98,28 +114,30 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
   }
 
   datePicker(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
+    final DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: widget.date,
       firstDate: DateTime(2015),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != widget.date) {
+    if (selectedDate != null && selectedDate != widget.date) {
       setState(() {
-        widget.date = selected;
+        widget.date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
+            widget.date.hour, widget.date.minute);
       });
     }
   }
 
   timePicker(BuildContext context) async {
-    final TimeOfDay? tempTimeOfDay = await showTimePicker(
+    final TimeOfDay? timeOfDay = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
       initialEntryMode: TimePickerEntryMode.dial,
     );
-    if (tempTimeOfDay != null && tempTimeOfDay != widget.timeOfDay) {
+    if (timeOfDay != null) {
       setState(() {
-        widget.timeOfDay = tempTimeOfDay;
+        widget.date = DateTime(
+            widget.date.year, widget.date.month, widget.date.day, timeOfDay.hour, timeOfDay.minute);
       });
     }
   }

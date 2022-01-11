@@ -6,7 +6,7 @@ class Record {
   Record({this.id, required this.dateTime, required this.value});
 
   String? id;
-  String dateTime;
+  DateTime dateTime;
   double value;
 
   get getId => this.id;
@@ -20,13 +20,14 @@ class Record {
   static Future<String> add(Record record) async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
 
-    if (record.getValue == '') {
-      return EMPTY_TEXTFIELD_ERR;
-    }
     // Firestore Add Record
     CollectionReference records = FirebaseFirestore.instance.collection('records');
     await records
-        .add({'recordValue': record.getValue, 'recordDateTime': record.getDateTime, 'userID': userID})
+        .add({
+          'recordValue': record.getValue,
+          'recordDateTime': record.getDateTime,
+          'userID': userID
+        })
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Record: $error"));
     return SUCCESS;

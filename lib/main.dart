@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/splash_screen.dart';
@@ -12,8 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(
           textTheme: const TextTheme(
-            headline2: TextStyle(
-                fontSize: 24.0, fontWeight: FontWeight.bold, color: black2),
+            headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: black2),
             button: TextStyle(fontSize: 16.0, color: black2),
           ),
         ),
