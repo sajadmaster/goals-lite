@@ -45,14 +45,6 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                   SizedBox(height: 40),
                   SigninButtonWidget('Apple'),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DashboardPage()),
-                        );
-                      },
-                      child: Text('Move to Dashboard')),
                 ],
               ),
             ),

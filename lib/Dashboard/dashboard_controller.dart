@@ -20,7 +20,6 @@ class _DoashboardBodyState extends State<DoashboardBody> {
           if (gl.hasData) {
             List<Goal>? goalsList = gl.data;
             if (goalsList != null && goalsList.isNotEmpty) {
-              print('goalsList length is ${goalsList.length}');
               return DashboardWithContent(goalsList);
             } else {
               return DashboardNoContent();

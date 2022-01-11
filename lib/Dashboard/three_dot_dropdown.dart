@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/Goal/goal.dart';
-import 'package:goals_lite/Record/add_data_view.dart';
+import 'package:goals_lite/Record/add_record_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
@@ -19,7 +19,7 @@ Widget ThreeVertDots(context, goal) {
         if (value == 1) {
           showBarModalBottomSheet(
             context: context,
-            builder: (context) => AddDataPopup(),
+            builder: (context) => AddRecordPopup(),
           );
         }
         // delete goal
@@ -47,7 +47,7 @@ Widget ThreeVertDots(context, goal) {
       itemBuilder: (context) => [
             PopupMenuItem(
               child: Text(
-                ADD_DATA,
+                ADD_RECORD,
                 style: TextStyle(color: black2),
               ),
               value: 1,

@@ -49,7 +49,6 @@ void isUserSignedin(context) {
         ),
       );
     } else {
-      print('Sajad: User is signed in: ${user.uid}');
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -61,6 +60,6 @@ void isUserSignedin(context) {
   });
 }
 
-// Future<void> _signOut() async {
-//   await FirebaseAuth.instance.signOut();
-// }
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
+}
