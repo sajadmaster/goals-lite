@@ -7,8 +7,9 @@ import 'package:intl/intl.dart';
 
 class AddRecordPopup extends StatefulWidget {
   AddRecordPopup();
-  DateTime dateTime = DateTime.now();
-  final dateFormat = new DateFormat('yyyy-MM-dd hh:mm');
+  DateTime date = DateTime.now();
+  final dateFormat = DateFormat('yyyy-MM-dd hh:mm');
+  TimeOfDay timeOfDay = TimeOfDay.now();
 
   @override
   _AddRecordPopupState createState() => _AddRecordPopupState();
@@ -40,7 +41,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               MyRow(
                   iconData: Icons.calendar_today_sharp,
                   title: DATE,
-                  dateFormat: DateFormat.yMMMd().format(widget.dateTime),
+                  dateFormat: DateFormat.yMMMd().format(widget.date),
                   onTapped: () {
                     print("Date Row clicked");
                     datePicker(context);
@@ -49,16 +50,17 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               MyRow(
                   iconData: Icons.access_time,
                   title: TIME,
-                  dateFormat: DateFormat.Hm().format(widget.dateTime),
+                  dateFormat: widget.timeOfDay.format(context),
                   onTapped: () {
                     print("Time Row clicked");
+                    timePicker(context);
                   }),
               const SizedBox(height: 25),
               TextFormField(
                 controller: recordValueController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                style: TextStyle(fontSize: 24),
-                decoration: InputDecoration(
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                style: const TextStyle(fontSize: 18),
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: ENTER_DATA_HERE,
                   hintText: '0.0',
@@ -68,7 +70,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               const SizedBox(height: 5),
               Visibility(
                 visible: isErrorVisible,
-                child: Text(
+                child: const Text(
                   ERROR_PLEASE_ENTER_DATA_HERE,
                   style: TextStyle(color: red4),
                 ),
@@ -98,14 +100,28 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
   datePicker(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: widget.dateTime,
+      initialDate: widget.date,
       firstDate: DateTime(2015),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != widget.dateTime)
+    if (selected != null && selected != widget.date) {
       setState(() {
-        widget.dateTime = selected;
+        widget.date = selected;
       });
+    }
+  }
+
+  timePicker(BuildContext context) async {
+    final TimeOfDay? tempTimeOfDay = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (tempTimeOfDay != null && tempTimeOfDay != widget.timeOfDay) {
+      setState(() {
+        widget.timeOfDay = tempTimeOfDay;
+      });
+    }
   }
 }
 
