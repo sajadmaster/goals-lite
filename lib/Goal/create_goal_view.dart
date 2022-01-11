@@ -67,7 +67,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                   RoundElevatedButton(
                     buttonText: SAVE,
                     onPress: () async {
-                      Goal goal = Goal(goalName: goalNameController.text, goalUnit: goalUnitController.text);
+                      Goal goal = Goal(name: goalNameController.text, unit: goalUnitController.text);
 
                       String response = await Goal.add(goal);
                       print('response $response');

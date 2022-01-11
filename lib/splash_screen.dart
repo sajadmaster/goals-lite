@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/Signin/signin_view.dart';
-import 'package:goals_lite/_shared/my_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
