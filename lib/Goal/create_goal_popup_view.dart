@@ -48,7 +48,9 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
               TextFormField(
                 controller: goalUnitController,
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(), labelText: GOAL_UNIT, helperText: EX_KM_KILOMETER_MI_MILE),
+                    border: UnderlineInputBorder(),
+                    labelText: GOAL_UNIT,
+                    helperText: EX_KM_KILOMETER_MI_MILE),
               ),
               const SizedBox(height: 5),
               Visibility(
@@ -67,7 +69,8 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                   RoundElevatedButton(
                     buttonText: SAVE,
                     onPress: () async {
-                      Goal goal = Goal(name: goalNameController.text, unit: goalUnitController.text);
+                      Goal goal =
+                          Goal(name: goalNameController.text, unit: goalUnitController.text);
 
                       String response = await Goal.add(goal);
                       print('response $response');

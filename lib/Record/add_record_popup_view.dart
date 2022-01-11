@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
+import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/record.dart';
-import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:intl/intl.dart';
 
 class AddRecordPopup extends StatefulWidget {
-  AddRecordPopup();
+  AddRecordPopup({required this.goal});
+  final Goal goal;
   DateTime date = DateTime.now();
 
   @override
@@ -32,8 +33,9 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Run',
+              // Goal name
+              Text(
+                widget.goal.getName,
                 style: TextStyle(color: blue2, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 25),
@@ -88,7 +90,9 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                       // Save record
                       if (recordValueController.text != '') {
                         Record record = Record(
-                            dateTime: widget.date, value: double.parse(recordValueController.text));
+                            dateTime: widget.date,
+                            value: double.parse(recordValueController.text),
+                            goalID: widget.goal.getID);
                         await Record.add(record);
                         Navigator.pushReplacement(
                           context,

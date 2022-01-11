@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/Goal/goal.dart';
-import 'package:goals_lite/Record/add_record_view.dart';
+import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
@@ -10,7 +10,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'goal_delete_alert.dart';
 
-Widget ThreeVertDots(context, goal) {
+Widget ThreeVertDots(context, Goal goal) {
   return PopupMenuButton(
       icon: Icon(Icons.more_vert),
       onSelected: (value) async {
@@ -19,7 +19,9 @@ Widget ThreeVertDots(context, goal) {
         if (value == 1) {
           showBarModalBottomSheet(
             context: context,
-            builder: (context) => AddRecordPopup(),
+            builder: (context) => AddRecordPopup(
+              goal: goal,
+            ),
           );
         }
         // delete goal
