@@ -20,6 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       backgroundColor: blue1,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: false,
         title: Text(
           GOOD_LUCK_WITH_YOUR_GOAL,

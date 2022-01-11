@@ -33,8 +33,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
             children: [
               const Text(
                 CREATE_A_GOAL,
-                style: TextStyle(
-                    color: blue2, fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(color: blue2, fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               TextFormField(
@@ -49,9 +48,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
               TextFormField(
                 controller: goalUnitController,
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: GOAL_UNIT,
-                    helperText: EX_KM_KILOMETER_MI_MILE),
+                    border: UnderlineInputBorder(), labelText: GOAL_UNIT, helperText: EX_KM_KILOMETER_MI_MILE),
               ),
               const SizedBox(height: 5),
               Visibility(
@@ -65,16 +62,12 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
-                      onPressed: () => {Navigator.pop(context)},
-                      child: const Text(CLOSE)),
+                  TextButton(onPressed: () => {Navigator.pop(context)}, child: const Text(CLOSE)),
                   const SizedBox(width: 20),
                   RoundElevatedButton(
                     buttonText: SAVE,
                     onPress: () async {
-                      Goal goal = Goal(
-                          goalName: goalNameController.text,
-                          goalUnit: goalUnitController.text);
+                      Goal goal = Goal(goalName: goalNameController.text, goalUnit: goalUnitController.text);
 
                       String response = await Goal.add(goal);
                       print('response $response');
@@ -84,10 +77,12 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                           isErrorVisible = true;
                         });
                       } else if (response == SUCCESS) {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => DashboardPage()),
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                            transitionDuration: Duration.zero,
+                          ),
                         );
                       }
                     },

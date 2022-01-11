@@ -33,9 +33,12 @@ Widget ThreeVertDots(context, goal) {
               print(FAILED_DELETE_GOAL);
             } else if (response == SUCCESS) {
               print('Goal deleted successfully.');
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => DashboardPage()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                  transitionDuration: Duration.zero,
+                ),
               );
             }
           }
