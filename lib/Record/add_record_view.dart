@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 
 class AddRecordPopup extends StatefulWidget {
   AddRecordPopup();
+  DateTime dateTime = DateTime.now();
+  final dateFormat = new DateFormat('yyyy-MM-dd hh:mm');
 
   @override
   _AddRecordPopupState createState() => _AddRecordPopupState();
@@ -15,8 +17,6 @@ class AddRecordPopup extends StatefulWidget {
 class _AddRecordPopupState extends State<AddRecordPopup> {
   bool isErrorVisible = false;
   static TextEditingController recordValueController = TextEditingController();
-  DateTime dateTime = DateTime.now();
-  final dateFormat = new DateFormat('yyyy-MM-dd hh:mm');
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +40,18 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               MyRow(
                   iconData: Icons.calendar_today_sharp,
                   title: DATE,
-                  dateFormat: DateFormat.yMMMd().format(dateTime),
+                  dateFormat: DateFormat.yMMMd().format(widget.dateTime),
                   onTapped: () {
-                    print("Row clicked");
+                    print("Date Row clicked");
+                    datePicker(context);
                   }),
               // Time Row
               MyRow(
                   iconData: Icons.access_time,
                   title: TIME,
-                  dateFormat: DateFormat.Hm().format(dateTime),
+                  dateFormat: DateFormat.Hm().format(widget.dateTime),
                   onTapped: () {
-                    print("Row clicked");
+                    print("Time Row clicked");
                   }),
               const SizedBox(height: 25),
               TextFormField(
@@ -93,13 +94,26 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
       ),
     );
   }
+
+  datePicker(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: widget.dateTime,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2030),
+    );
+    if (selected != null && selected != widget.dateTime)
+      setState(() {
+        widget.dateTime = selected;
+      });
+  }
 }
 
-Widget MyRow({required iconData, required title, required dateFormat, required onTapped}) {
+Widget MyRow({required iconData, required title, required dateFormat, required Function onTapped}) {
   return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        onTapped;
+        onTapped();
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
