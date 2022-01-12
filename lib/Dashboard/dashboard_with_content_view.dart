@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/goal_card_view.dart';
 import 'package:goals_lite/Goal/create_goal_popup_view.dart';
 import 'package:goals_lite/Goal/goal.dart';
+import 'package:goals_lite/GoalDetail/goal_detail_main_view.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
@@ -27,18 +28,34 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
         children: <Widget>[
           Text(
             GOALS,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: black2),
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: black2),
           ),
           SizedBox(height: 9),
           Expanded(
+            // Goal Card ListView
             child: ListView.builder(
                 itemCount: widget.goalsList.length,
                 itemBuilder: (context, index) {
-                  return GoalCard(goal: widget.goalsList[index]);
+                  return GestureDetector(
+                    // Goal Card
+                    child: GoalCard(
+                      goal: widget.goalsList[index],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                GoalDetail(widget.goalsList[index])),
+                      );
+                    },
+                  );
                 }),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
+            // Create Goal Button
             child: RoundElevatedButton(
               buttonText: CREATE_GOAL,
               onPress: () {

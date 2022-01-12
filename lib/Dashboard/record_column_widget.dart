@@ -16,11 +16,13 @@ class RecordColumn extends StatelessWidget {
           children: [
             Text(
               '8.5',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: black2),
+              style: TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold, color: black2),
             ),
             Text(
               goal.getUnit,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: black2),
+              style: TextStyle(
+                  fontSize: 12, fontWeight: FontWeight.bold, color: black2),
             ),
           ],
         ),
