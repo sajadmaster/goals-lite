@@ -3,9 +3,10 @@ import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class GoalDetail extends StatefulWidget {
-  GoalDetail(this.goal);
+  const GoalDetail(this.goal, {Key? key}) : super(key: key);
   final Goal goal;
 
   @override
@@ -17,26 +18,31 @@ class _GoalDetailState extends State<GoalDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: Colors.black, //change your color here
       ),
       backgroundColor: Colors.white,
       titleSpacing: 0.0,
       title: Text(
         widget.goal.getName,
-        style: TextStyle(color: blue2, fontWeight: FontWeight.bold),
+        style: const TextStyle(color: blue2, fontWeight: FontWeight.bold),
       ),
       actions: [
         TextButton(
           onPressed: () {
-            AddRecordPopup(goal: widget.goal);
+            showBarModalBottomSheet(
+              context: context,
+              builder: (context) => AddRecordPopup(
+                goal: widget.goal,
+              ),
+            );
           },
-          child: Text(
+          child: const Text(
             ADD_RECORD,
             style: TextStyle(fontSize: 14),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
       ],
     ));
   }
