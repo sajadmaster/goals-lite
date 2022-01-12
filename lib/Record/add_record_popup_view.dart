@@ -8,7 +8,7 @@ import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:intl/intl.dart';
 
 class AddRecordPopup extends StatefulWidget {
-  AddRecordPopup({required this.goal});
+  AddRecordPopup({Key? key, required this.goal}) : super(key: key);
   final Goal goal;
   DateTime date = DateTime.now();
 
@@ -36,7 +36,8 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               // Goal name
               Text(
                 widget.goal.getName,
-                style: TextStyle(color: blue2, fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: blue2, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 25),
               // Date Row
@@ -59,7 +60,8 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
               // Enter data
               TextFormField(
                 controller: recordValueController,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 style: const TextStyle(fontSize: 18),
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -81,7 +83,9 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // Close button
-                  TextButton(onPressed: () => {Navigator.pop(context)}, child: const Text(CLOSE)),
+                  TextButton(
+                      onPressed: () => {Navigator.pop(context)},
+                      child: const Text(CLOSE)),
                   const SizedBox(width: 20),
                   // Save button
                   RoundElevatedButton(
@@ -97,7 +101,8 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                            pageBuilder: (context, animation1, animation2) =>
+                                DashboardPage(),
                             transitionDuration: Duration.zero,
                           ),
                         );
@@ -126,8 +131,8 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
     );
     if (selectedDate != null && selectedDate != widget.date) {
       setState(() {
-        widget.date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
-            widget.date.hour, widget.date.minute);
+        widget.date = DateTime(selectedDate.year, selectedDate.month,
+            selectedDate.day, widget.date.hour, widget.date.minute);
       });
     }
   }
@@ -140,14 +145,18 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
     );
     if (timeOfDay != null) {
       setState(() {
-        widget.date = DateTime(
-            widget.date.year, widget.date.month, widget.date.day, timeOfDay.hour, timeOfDay.minute);
+        widget.date = DateTime(widget.date.year, widget.date.month,
+            widget.date.day, timeOfDay.hour, timeOfDay.minute);
       });
     }
   }
 }
 
-Widget MyRow({required iconData, required title, required dateFormat, required Function onTapped}) {
+Widget MyRow(
+    {required iconData,
+    required title,
+    required dateFormat,
+    required Function onTapped}) {
   return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

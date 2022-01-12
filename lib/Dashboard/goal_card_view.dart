@@ -8,7 +8,7 @@ import 'package:goals_lite/Dashboard/three_dot_dropdown.dart';
 
 class GoalCard extends StatelessWidget {
   final Goal goal;
-  GoalCard({required this.goal});
+  const GoalCard({Key? key, required this.goal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

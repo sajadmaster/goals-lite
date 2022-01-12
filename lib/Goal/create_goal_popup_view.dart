@@ -7,7 +7,7 @@ import 'package:goals_lite/_shared/my_strings.dart';
 import 'goal.dart';
 
 class CreateGoalPopUp extends StatefulWidget {
-  CreateGoalPopUp();
+  const CreateGoalPopUp({Key? key}) : super(key: key);
 
   @override
   _CreateGoalPopUpState createState() => _CreateGoalPopUpState();
@@ -33,7 +33,8 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
             children: [
               const Text(
                 CREATE_A_GOAL,
-                style: TextStyle(color: blue2, fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: blue2, fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               TextFormField(
@@ -64,13 +65,16 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(onPressed: () => {Navigator.pop(context)}, child: const Text(CLOSE)),
+                  TextButton(
+                      onPressed: () => {Navigator.pop(context)},
+                      child: const Text(CLOSE)),
                   const SizedBox(width: 20),
                   RoundElevatedButton(
                     buttonText: SAVE,
                     onPress: () async {
-                      Goal goal =
-                          Goal(name: goalNameController.text, unit: goalUnitController.text);
+                      Goal goal = Goal(
+                          name: goalNameController.text,
+                          unit: goalUnitController.text);
 
                       String response = await Goal.add(goal);
                       print('response $response');
@@ -83,7 +87,8 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                            pageBuilder: (context, animation1, animation2) =>
+                                DashboardPage(),
                             transitionDuration: Duration.zero,
                           ),
                         );

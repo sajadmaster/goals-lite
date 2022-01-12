@@ -5,6 +5,8 @@ import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DashboardNoContent extends StatelessWidget {
+  const DashboardNoContent({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +24,8 @@ class DashboardNoContent extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Center(
-                  child: Text(SET_GOAL_GET_STARTED, style: TextStyle(fontSize: 16)),
+                  child: Text(SET_GOAL_GET_STARTED,
+                      style: TextStyle(fontSize: 16)),
                 ),
               ],
             ),

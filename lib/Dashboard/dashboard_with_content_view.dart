@@ -11,7 +11,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class DashboardWithContent extends StatefulWidget {
   final List<Goal> goalsList;
 
-  DashboardWithContent(this.goalsList);
+  const DashboardWithContent(this.goalsList, {Key? key}) : super(key: key);
 
   @override
   _DashboardWithContentState createState() => _DashboardWithContentState();

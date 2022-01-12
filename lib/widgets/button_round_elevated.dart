@@ -4,7 +4,9 @@ class RoundElevatedButton extends StatelessWidget {
   String buttonText;
   VoidCallback onPress;
 
-  RoundElevatedButton({required this.buttonText, required this.onPress});
+  RoundElevatedButton(
+      {Key? key, required this.buttonText, required this.onPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

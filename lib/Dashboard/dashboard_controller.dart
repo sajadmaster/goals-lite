@@ -4,6 +4,8 @@ import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/Goal/goal.dart';
 
 class DoashboardBody extends StatefulWidget {
+  const DoashboardBody({Key? key}) : super(key: key);
+
   @override
   _DoashboardBodyState createState() => _DoashboardBodyState();
 }
