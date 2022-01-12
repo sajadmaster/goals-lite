@@ -47,27 +47,35 @@ class _GoalDetailState extends State<GoalDetail> {
             const SizedBox(width: 10),
           ],
         ),
-        body: FutureBuilder(
-            future: Record.getRecordList(widget.goal),
-            builder: (context, AsyncSnapshot<List<Record>> rl) {
-              if (!rl.hasData) {
-                return Center(child: CircularProgressIndicator());
-              } else {
-                return Container(
-                    child: ListView.builder(
-                        itemCount: rl.data!.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (rl.hasData) {
-                            print(rl.data?.first.getValue);
-                            return RecordCard(
-                              record: rl.data![index],
-                            );
-                          } else {
-                            return Text('Error in record data');
-                          }
-                        }));
-              }
-            }));
+        body: Column(
+          children: [
+            // ############## Data Section
+            SizedBox(height: 25),
+            Text('Data'),
+            Expanded(
+              child: FutureBuilder(
+                  future: Record.getRecordList(widget.goal),
+                  builder: (context, AsyncSnapshot<List<Record>> rl) {
+                    if (!rl.hasData) {
+                      return Center(child: Text('Loading data...'));
+                    } else {
+                      return Container(
+                          child: ListView.builder(
+                              itemCount: rl.data!.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (BuildContext context, int index) {
+                                if (rl.hasData) {
+                                  return RecordCard(
+                                      record: rl.data![index],
+                                      goalUnit: widget.goal.getUnit);
+                                } else {
+                                  return Text('Error in record data');
+                                }
+                              }));
+                    }
+                  }),
+            ),
+          ],
+        ));
   }
 }

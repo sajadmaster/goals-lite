@@ -38,6 +38,8 @@ class Goal {
   }
 
   static Future<String> delete(Goal goal) {
+    // TODO Also delete goal records
+
     print('Request deleting goalID: ${goal.getID}');
     CollectionReference goalsCollection =
         FirebaseFirestore.instance.collection('goals');

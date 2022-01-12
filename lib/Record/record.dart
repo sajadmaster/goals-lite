@@ -5,18 +5,18 @@ import 'package:goals_lite/_shared/my_constants.dart';
 
 class Record {
   Record(
-      {this.id,
+      {this.ID,
       required this.dateTime,
       required this.value,
       required this.goalID});
 
-  String? id;
+  String? ID;
   DateTime dateTime;
   double value;
   String goalID;
 
-  get getId => this.id;
-  set setId(id) => this.id = id;
+  get getID => this.ID;
+  set setID(id) => this.ID = id;
   get getDateTime => this.dateTime;
   set setDateTime(dateTime) => this.dateTime = dateTime;
   get getValue => this.value;
@@ -43,6 +43,17 @@ class Record {
     return SUCCESS;
   }
 
+  static Future<String> delete(Record record) {
+    print('Request deleting recordID: ${record.getID}');
+    CollectionReference recordsCollection =
+        FirebaseFirestore.instance.collection('records');
+    return recordsCollection
+        .doc(record.getID)
+        .delete()
+        .then((value) => SUCCESS)
+        .catchError((error) => FAILED_DELETE_GOAL);
+  }
+
   static Future<List<Record>> getRecordList(Goal goal) async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -53,7 +64,7 @@ class Record {
     List<Record> recordsList = querySnapshot.docs
         .map(
           (doc) => Record(
-              id: doc.reference.id,
+              ID: doc.reference.id,
               value: doc["recordValue"],
               dateTime: doc['recordDateTime'].toDate(),
               goalID: doc['goalID']),

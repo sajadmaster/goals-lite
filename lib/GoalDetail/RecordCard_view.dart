@@ -6,34 +6,52 @@ import 'package:intl/intl.dart';
 
 class RecordCard extends StatelessWidget {
   final Record record;
-  const RecordCard({Key? key, required this.record}) : super(key: key);
+  final String goalUnit;
+  const RecordCard({Key? key, required this.record, required this.goalUnit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 160,
-      child: Card(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: [
-                Text(
-                  DateFormat.yMMMd().format(record.getDateTime),
-                  style: const TextStyle(
-                      color: black2, fontSize: 18, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, top: 10, bottom: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Text(
+                      DateFormat.yMMMd().format(record.getDateTime),
+                      style: const TextStyle(
+                          color: black2,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      DateFormat.Hm().format(record.getDateTime),
+                      style: const TextStyle(
+                          color: black2,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    ThreeDots_recordCard(context, record),
+                  ],
                 ),
-                SizedBox(width: 10),
-                Text(
-                  DateFormat.Hm().format(record.getDateTime),
-                  style: const TextStyle(
-                      color: black2, fontSize: 18, fontWeight: FontWeight.bold),
+                SizedBox(
+                  height: 20,
                 ),
-                const Spacer(),
-                ThreeDots_recordCard(context, record),
+                Text(
+                  record.getValue.toString() + ' ' + goalUnit,
+                  style: TextStyle(color: black2, fontSize: 16),
+                ),
               ],
             ),
-            Text('3.5km'),
-          ],
+          ),
         ),
       ),
     );
