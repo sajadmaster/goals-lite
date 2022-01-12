@@ -4,11 +4,7 @@ import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 
 class Record {
-  Record(
-      {this.ID,
-      required this.dateTime,
-      required this.value,
-      required this.goalID});
+  Record({this.ID, required this.dateTime, required this.value, required this.goalID});
 
   String? ID;
   DateTime dateTime;
@@ -29,8 +25,7 @@ class Record {
     String userID = FirebaseAuth.instance.currentUser!.uid;
 
     // Firestore Add Record
-    CollectionReference records =
-        FirebaseFirestore.instance.collection('records');
+    CollectionReference records = FirebaseFirestore.instance.collection('records');
     await records
         .add({
           'recordValue': record.getValue,
@@ -45,8 +40,7 @@ class Record {
 
   static Future<String> delete(Record record) {
     print('Request deleting recordID: ${record.getID}');
-    CollectionReference recordsCollection =
-        FirebaseFirestore.instance.collection('records');
+    CollectionReference recordsCollection = FirebaseFirestore.instance.collection('records');
     return recordsCollection
         .doc(record.getID)
         .delete()
@@ -70,9 +64,27 @@ class Record {
               goalID: doc['goalID']),
         )
         .toList();
-    print('Sajad recordsList is: ${recordsList.length}');
     return recordsList;
   }
+
+  // static Future<List<Record>> getAllRecords(Goal goal) async {
+  //   String userID = FirebaseAuth.instance.currentUser!.uid;
+  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //       .collection("records")
+  //       .where('userID', isEqualTo: userID)
+  //       .get();
+  //   List<Record> allRecordsList = querySnapshot.docs
+  //       .map(
+  //         (doc) => Record(
+  //             ID: doc.reference.id,
+  //             value: doc["recordValue"],
+  //             dateTime: doc['recordDateTime'].toDate(),
+  //             goalID: doc['goalID']),
+  //       )
+  //       .toList();
+  //   print('Sajad allRecordsList is: ${allRecordsList.length}');
+  //   return allRecordsList;
+  // }
 
   // Get Today
   // static Future<String> getToday(Goal goal) async {

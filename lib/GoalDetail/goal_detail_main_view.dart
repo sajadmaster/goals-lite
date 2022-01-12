@@ -51,7 +51,10 @@ class _GoalDetailState extends State<GoalDetail> {
         body: Column(
           children: [
             // ############## Chart
-            Expanded(child: RecordChart.withSampleData()),
+
+            Expanded(
+                child: RecordChart.showWeekData(
+                    Record.getRecordList(widget.goal))),
             // ############## Data Section
             SizedBox(height: 50),
             Text('Data'),
