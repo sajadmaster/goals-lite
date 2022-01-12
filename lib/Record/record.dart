@@ -4,7 +4,11 @@ import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 
 class Record {
-  Record({this.id, required this.dateTime, required this.value, required this.goalID});
+  Record(
+      {this.id,
+      required this.dateTime,
+      required this.value,
+      required this.goalID});
 
   String? id;
   DateTime dateTime;
@@ -25,7 +29,8 @@ class Record {
     String userID = FirebaseAuth.instance.currentUser!.uid;
 
     // Firestore Add Record
-    CollectionReference records = FirebaseFirestore.instance.collection('records');
+    CollectionReference records =
+        FirebaseFirestore.instance.collection('records');
     await records
         .add({
           'recordValue': record.getValue,
@@ -35,6 +40,28 @@ class Record {
         })
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Record: $error"));
+    return SUCCESS;
+  }
+
+  // Get Today
+  static Future<String> getToday(Goal goal) async {
+    String userID = FirebaseAuth.instance.currentUser!.uid;
+
+    // Firestore Get List of Records for Today
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("records")
+        .where('userID', isEqualTo: userID)
+        .where('goalID', isEqualTo: goal.getID)
+        .get();
+    List<Record> recordsList = querySnapshot.docs
+        .map((doc) => Record(
+            id: doc.reference.id,
+            value: doc["recordValue"],
+            dateTime: doc['recordValue'],
+            goalID: doc['goalID']))
+        .toList();
+    print('sajad recordsList length ${recordsList.length}');
+
     return SUCCESS;
   }
 }

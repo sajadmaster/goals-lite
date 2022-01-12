@@ -27,7 +27,11 @@ class Goal {
     // Firestore Add Goal
     CollectionReference goals = FirebaseFirestore.instance.collection('goals');
     await goals
-        .add({'goalName': goal.getName, 'goalUnit': goal.getUnit, 'userID': userID})
+        .add({
+          'goalName': goal.getName,
+          'goalUnit': goal.getUnit,
+          'userID': userID
+        })
         .then((value) => print("value $value"))
         .catchError((error) => print("Failed to add Goal: $error"));
     return SUCCESS;
@@ -35,19 +39,25 @@ class Goal {
 
   static Future<String> delete(Goal goal) {
     print('Request deleting goalID: ${goal.getID}');
-    CollectionReference goalsCollection = FirebaseFirestore.instance.collection('goals');
-    return goalsCollection.doc(goal.getID).delete().then((value) => SUCCESS).catchError((error) => FAILED_DELETE_GOAL);
+    CollectionReference goalsCollection =
+        FirebaseFirestore.instance.collection('goals');
+    return goalsCollection
+        .doc(goal.getID)
+        .delete()
+        .then((value) => SUCCESS)
+        .catchError((error) => FAILED_DELETE_GOAL);
   }
 
   static Future<List<Goal>> getGoalsList() async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection("goals").where('userID', isEqualTo: userID).get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("goals")
+        .where('userID', isEqualTo: userID)
+        .get();
     List<Goal> goalsList = querySnapshot.docs
-        .map((doc) => Goal(id: doc.reference.id, name: doc["goalName"], unit: doc['goalUnit']))
+        .map((doc) => Goal(
+            id: doc.reference.id, name: doc["goalName"], unit: doc['goalUnit']))
         .toList();
-    print('sajad goalsList length ${goalsList.length}');
-
     return goalsList;
   }
 }
