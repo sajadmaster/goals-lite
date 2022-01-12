@@ -16,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Firebase.initializeApp().whenComplete(() => isUserSignedin(context));
+    // Firebase.initializeApp().whenComplete(() => _signOut());
     WidgetsFlutterBinding.ensureInitialized();
   }
 

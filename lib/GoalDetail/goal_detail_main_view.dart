@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
+import 'package:goals_lite/GoalDetail/RecordChart.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/Record/record.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
@@ -49,8 +50,10 @@ class _GoalDetailState extends State<GoalDetail> {
         ),
         body: Column(
           children: [
+            // ############## Chart
+            Expanded(child: RecordChart.withSampleData()),
             // ############## Data Section
-            SizedBox(height: 25),
+            SizedBox(height: 50),
             Text('Data'),
             Expanded(
               child: FutureBuilder(

@@ -13,8 +13,6 @@ class SignIn {
         AppleIDAuthorizationScopes.fullName,
       ],
     ).then((credential) {
-      // print("Sajad credential: $credential");
-
       final credentialFirebase = OAuthProvider("apple.com").credential(
           accessToken: credential.authorizationCode,
           idToken: credential.identityToken);
