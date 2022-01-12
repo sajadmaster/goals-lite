@@ -13,7 +13,8 @@ const GOAL_NAME = 'Goal name';
 const EX_RUN_STUDY_SWIM = 'ex: Run, Study, Swim';
 const GOAL_UNIT = 'Goal unit';
 const EX_KM_KILOMETER_MI_MILE = 'ex: km (kilometer), mi (mile), hr (hour)';
-const ERROR_GOAL_NAME_OR_GOAL_UNIT_EMPTY = 'Error: Goal name or goal unit is empty.';
+const ERROR_GOAL_NAME_OR_GOAL_UNIT_EMPTY =
+    'Error: Goal name or goal unit is empty.';
 const GOALS = 'Goals';
 
 // Dropdown
@@ -28,3 +29,6 @@ const TIME = 'Time';
 
 // Sign in
 const WELIME_TO_GOALS_LITE = 'Welcome to Goals Lite!';
+
+// Goal Detail
+const DELETE_RECORD = 'Delete Record';

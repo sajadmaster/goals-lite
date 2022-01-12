@@ -43,25 +43,45 @@ class Record {
     return SUCCESS;
   }
 
-  // Get Today
-  static Future<String> getToday(Goal goal) async {
+  static Future<List<Record>> getRecordList(Goal goal) async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
-
-    // Firestore Get List of Records for Today
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("records")
         .where('userID', isEqualTo: userID)
         .where('goalID', isEqualTo: goal.getID)
         .get();
     List<Record> recordsList = querySnapshot.docs
-        .map((doc) => Record(
-            id: doc.reference.id,
-            value: doc["recordValue"],
-            dateTime: doc['recordValue'],
-            goalID: doc['goalID']))
+        .map(
+          (doc) => Record(
+              id: doc.reference.id,
+              value: doc["recordValue"],
+              dateTime: doc['recordDateTime'].toDate(),
+              goalID: doc['goalID']),
+        )
         .toList();
-    print('sajad recordsList length ${recordsList.length}');
-
-    return SUCCESS;
+    print('Sajad recordsList is: ${recordsList.length}');
+    return recordsList;
   }
+
+  // Get Today
+  // static Future<String> getToday(Goal goal) async {
+  //   String userID = FirebaseAuth.instance.currentUser!.uid;
+
+  //   // Firestore Get List of Records for Today
+  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //       .collection("records")
+  //       .where('userID', isEqualTo: userID)
+  //       .where('goalID', isEqualTo: goal.getID)
+  //       .get();
+  //   List<Record> recordsList = querySnapshot.docs
+  //       .map((doc) => Record(
+  //           id: doc.reference.id,
+  //           value: doc["recordValue"],
+  //           dateTime: doc['recordValue'],
+  //           goalID: doc['goalID']))
+  //       .toList();
+  //   print('sajad recordsList length ${recordsList.length}');
+
+  //   return SUCCESS;
+  // }
 }

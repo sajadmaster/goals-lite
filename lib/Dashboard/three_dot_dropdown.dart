@@ -9,7 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'goal_delete_alert.dart';
 
-Widget ThreeVertDots(context, Goal goal) {
+Widget ThreeVertDots_goalCard(context, Goal goal) {
   return PopupMenuButton(
       icon: const Icon(Icons.more_vert),
       onSelected: (value) async {

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
-class RecordColumn extends StatelessWidget {
+class StatColumn extends StatelessWidget {
   Goal goal;
-  RecordColumn(this.goal, {Key? key}) : super(key: key);
+  StatColumn(this.goal, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
