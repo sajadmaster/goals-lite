@@ -28,8 +28,7 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
         children: <Widget>[
           Text(
             GOALS,
-            style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold, color: black2),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: black2),
           ),
           SizedBox(height: 9),
           Expanded(
@@ -45,9 +44,7 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                GoalDetail(widget.goalsList[index])),
+                        MaterialPageRoute(builder: (context) => GoalDetail(widget.goalsList[index])),
                       );
                     },
                   );

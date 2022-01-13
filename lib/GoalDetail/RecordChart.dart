@@ -58,7 +58,6 @@ class RecordChart extends StatelessWidget {
     // Weekrecord list: populate
     for (int i = 0; i < 7; i++) {
       print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
-      // weekRecord.add(WeekRecord(daysOfWeek[i].weekday.toString(), valuesOfWeek[i].toInt()));
       weekRecord.add(WeekRecord(DateFormat('EE').format(daysOfWeek[i]), valuesOfWeek[i].toInt()));
     }
 
@@ -88,28 +87,3 @@ extension DateOnlyCompareItem on DateTime {
     return year == other.year && month == other.month && day == other.day;
   }
 }
-
-    // recordList.catchError(
-    //   (onError) {
-    //     print("sajad called when there is an error catches error");
-    //   },
-    // ).then((recordList) {
-    //   // Loop through all records and filter them for the selected week
-    //   print('records value:');
-    //   for (final Record record in recordList) {
-    //     print('Record Date ${record.getDateTime} and record value ${record.getValue}');
-    //     for (int i = 0; i < 7; i++) {
-    //       if (DateOnlyCompareItem(record.getDateTime).isSameDate(daysOfWeek[i])) {
-    //         print('Matched date: ${record.getDateTime} Matched value: ${record.getDateTime} Matched i: $i');
-    //         valuesOfWeek[i] += record.getValue;
-    //         print('New valuesOfWeek: ${valuesOfWeek[i]} i is $i');
-    //       }
-    //     }
-    //   }
-
-    //   // Weekrecord list: populate
-    //   for (int i = 0; i < 7; i++) {
-    //     print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
-    //     weekRecord.add(WeekRecord(daysOfWeek[i].weekday.toString(), valuesOfWeek[i].toInt()));
-    //   }
-    // });
