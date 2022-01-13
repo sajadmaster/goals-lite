@@ -9,7 +9,7 @@ class RecordChart extends StatelessWidget {
 
   RecordChart(this.seriesList);
 
-  factory RecordChart.showWeekData(AsyncSnapshot<List<Record>> recordList) {
+  factory RecordChart.showWeekData(List<Record> recordList) {
     return RecordChart(
       getWeekData(recordList),
     );
@@ -22,7 +22,7 @@ class RecordChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<WeekRecord, String>> getWeekData(AsyncSnapshot<List<Record>> recordList) {
+  static List<charts.Series<WeekRecord, String>> getWeekData(List<Record> recordList) {
     DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     print('today is $todayDate');
     List<WeekRecord> weekRecord = [];
@@ -37,15 +37,15 @@ class RecordChart extends StatelessWidget {
       print('${i - 1} and ${daysOfWeek[i - 1]}');
     }
 
-    print('recordList length is ${recordList.data!.length}');
-    print('recordList length is ${recordList.data![0].getDateTime}');
+    print('recordList length is ${recordList.length}');
+    print('recordList length is ${recordList[0].getDateTime}');
 
     print('records value:');
 
     // Loop through all records and filter them for the selected week
     Record tempRecord;
-    for (int i = 1; i < recordList.data!.length; i++) {
-      tempRecord = recordList.data![i];
+    for (int i = 1; i < recordList.length; i++) {
+      tempRecord = recordList[i];
       print('Record Date ${tempRecord.getDateTime} and record value ${tempRecord.getValue}');
       for (int i = 0; i < 7; i++) {
         if (DateOnlyCompareItem(tempRecord.getDateTime).isSameDate(daysOfWeek[i])) {

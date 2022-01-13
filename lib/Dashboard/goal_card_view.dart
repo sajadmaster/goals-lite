@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Record/record.dart';
+import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:goals_lite/_shared/statistics_column_widget.dart';
 import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
@@ -51,11 +52,8 @@ class _GoalCardState extends State<GoalCard> {
                   builder: (BuildContext context, AsyncSnapshot<List<Record>> rl) {
                     if (rl.hasData) {
                       List<Record>? recordsList = rl.data;
-                      if (recordsList != null && recordsList.isNotEmpty) {
-                        List<String> statTitleList = ['Today', 'Month', 'Total'];
-                        List<double> statValuesList = Stats(recordsList).getTodayStatsWidget();
-                        return StatWidgetRow(statTitleList, statValuesList, widget.goal);
-                      }
+                      List<double> statValuesList = Stats(recordsList!).getTodayStatsWidget();
+                      return StatWidgetRow(STAT_TITLE_LIST, statValuesList, widget.goal);
                     } else if (rl.hasError) {
                       print('Sajad hasError: ${rl.error}');
                       return Text('${rl.error}');

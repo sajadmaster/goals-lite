@@ -9,6 +9,7 @@ import 'package:goals_lite/Record/record.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:goals_lite/_shared/statistics_column_widget.dart';
+import 'package:goals_lite/_shared/statistics_controller.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class GoalDetail extends StatefulWidget {
@@ -32,10 +33,13 @@ class _GoalDetailState extends State<GoalDetail> {
             flex: 8,
             child: FutureBuilder(
                 future: Record.getRecordList(widget.goal),
-                builder: (context, AsyncSnapshot<List<Record>> recordList) {
-                  if (!recordList.hasData) {
+                builder: (context, AsyncSnapshot<List<Record>> rl) {
+                  if (!rl.hasData) {
                     return const Center(child: Text('Loading data...'));
                   } else {
+                    List<Record>? recordList = rl.data;
+                    List<double> statValuesList = Stats(recordList!).getTodayStatsWidget();
+
                     return Column(
                       children: [
                         const SizedBox(height: 15),
@@ -47,15 +51,7 @@ class _GoalDetailState extends State<GoalDetail> {
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            children: [
-                              // StatColumn(widget.goal),
-                              // const Spacer(),
-                              // StatColumn(widget.goal),
-                              // const Spacer(),
-                              // StatColumn(widget.goal),
-                            ],
-                          ),
+                          child: StatWidgetRow(STAT_TITLE_LIST, statValuesList, widget.goal),
                         ),
                         const SizedBox(height: 25),
                         const SizedBox(
@@ -93,14 +89,9 @@ class _GoalDetailState extends State<GoalDetail> {
                                     child: ListView.builder(
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        itemCount: recordList.data!.length,
+                                        itemCount: recordList.length,
                                         itemBuilder: (BuildContext context, int index) {
-                                          if (recordList.hasData) {
-                                            return RecordCard(
-                                                record: recordList.data![index], goalUnit: widget.goal.getUnit);
-                                          } else {
-                                            return const Text('Error in record data');
-                                          }
+                                          return RecordCard(record: recordList[index], goalUnit: widget.goal.getUnit);
                                         }),
                                   ),
                                 ],
