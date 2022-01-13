@@ -52,16 +52,9 @@ class _GoalCardState extends State<GoalCard> {
                     if (rl.hasData) {
                       List<Record>? recordsList = rl.data;
                       if (recordsList != null && recordsList.isNotEmpty) {
-                        // Goal goal = Goal(name: 'name', unit: 'unit');
-
+                        List<String> statTitleList = ['Today', 'Month', 'Total'];
                         List<double> statValuesList = Stats(recordsList).getTodayStatsWidget();
-                        return Row(children: [
-                          StatWidget('Today', widget.goal, statValuesList[0]),
-                          Spacer(),
-                          StatWidget('Month', widget.goal, statValuesList[1]),
-                          Spacer(),
-                          StatWidget('Total', widget.goal, statValuesList[2]),
-                        ]);
+                        return StatWidgetRow(statTitleList, statValuesList, widget.goal);
                       }
                     } else if (rl.hasError) {
                       print('Sajad hasError: ${rl.error}');
