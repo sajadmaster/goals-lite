@@ -31,27 +31,43 @@ class RecordChart extends StatelessWidget {
       WeekRecord('Sun', 0),
     ];
 
-    DateTime todayDate = DateTime.now();
+    // static const int monday = 1;
+    // static const int tuesday = 2;
+    // static const int wednesday = 3;
+    // static const int thursday = 4;
+    // static const int friday = 5;
+    // static const int saturday = 6;
+    // static const int sunday = 7;
+    // static const int daysPerWeek = 7;
+
+    // get start and end week days
+
+    DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     print('today is $todayDate');
-    DateTime _1weekDate = todayDate.subtract(Duration(days: 7)); // 1 week ago
-    print('_1weekDate is $_1weekDate');
+    List<DateTime> daysOfWeek = List.filled(7, todayDate);
+    // Generate days of week from Monday (1) to Sunday (7)
+    for (int i = 1; i < 8; i++) {
+      DateTime weekDay = todayDate.subtract(Duration(days: todayDate.weekday - i));
+      daysOfWeek[i - 1] = weekDay;
+      print('i is $i and ${daysOfWeek[i - 1]}');
+    }
 
     recordList.catchError(
       (onError) {
         print("sajad called when there is an error catches error");
       },
     ).then((recordList) {
-      for (Record record in recordList) {
-        if (_1weekDate.isBefore(record.getDateTime)) {
-          print('sajad date is inside 1 week ago: ${record.getDateTime}');
-          print(record.getValue);
-          print(record.getID);
-        }
-      }
+      // for (Record record in recordList) {
+      //   if (monday.isBefore(record.getDateTime)) {
+      //     print('sajad date is inside 1 week ago: ${record.getDateTime}');
+      //     print(record.getValue);
+      //     print(record.getID);
+      //   }
+      // }
 
-      Record findRecord(DateTime dateTime) =>
-          recordList.firstWhere((record) => record.getDateTime == DateTime.now().year);
-      print("called with value = getGoalID " + recordList.first.getGoalID);
+      // Record findRecord(DateTime dateTime) =>
+      //     recordList.firstWhere((record) => record.getDateTime == DateTime.now().year);
+      // print("called with value = getGoalID " + recordList.first.getGoalID);
     });
 
     // recordList.catchError(
