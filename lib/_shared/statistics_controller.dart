@@ -6,7 +6,7 @@ class Stats {
   final List<Record> recordList;
   Stats(this.recordList);
 
-  getTodayStats() {
+  StatWidget getTodayStatsWidget() {
     double todayValue = 0;
     print('Record List: ${recordList[0].getDateTime}');
 
