@@ -65,7 +65,7 @@ class RecordChart extends StatelessWidget {
     return [
       charts.Series<WeekRecord, String>(
         id: 'Week',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
         domainFn: (WeekRecord weekRecord, _) => weekRecord.week,
         measureFn: (WeekRecord weekRecord, _) => weekRecord.value,
         data: weekRecord,
