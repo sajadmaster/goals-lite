@@ -87,8 +87,6 @@ class _GoalDetailState extends State<GoalDetail> {
                                   SizedBox(height: 10),
                                   Expanded(
                                     child: ListView.builder(
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
                                         itemCount: recordList.length,
                                         itemBuilder: (BuildContext context, int index) {
                                           return RecordCard(record: recordList[index], goalUnit: widget.goal.getUnit);

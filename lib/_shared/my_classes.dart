@@ -11,3 +11,7 @@ extension DateOnlyCompareItem on DateTime {
     return year <= other.year && month <= other.month && day <= other.day;
   }
 }
+
+String removeDecimalZeroFormat(double n) {
+  return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
+}

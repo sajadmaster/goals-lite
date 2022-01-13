@@ -51,9 +51,9 @@ class _GoalCardState extends State<GoalCard> {
                   future: recordsListFuture,
                   builder: (BuildContext context, AsyncSnapshot<List<Record>> rl) {
                     if (rl.hasData) {
-                      List<Record>? recordsList = rl.data;
-                      List<double> statValuesList = Stats(recordsList!).getTodayStatsWidget();
-                      return StatWidgetRow(STAT_TITLE_LIST, statValuesList, widget.goal);
+                      List<Record>? recordList = rl.data;
+                      List<double> statValueList = Stats(recordList!).getTodayStatsWidget();
+                      return StatWidgetRow(STAT_TITLE_LIST, statValueList, widget.goal);
                     } else if (rl.hasError) {
                       print('Sajad hasError: ${rl.error}');
                       return Text('${rl.error}');

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Goal/goal.dart';
+import 'package:goals_lite/_shared/my_classes.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
 class StatWidget extends StatelessWidget {
   final String statDateType;
   final Goal goal;
   final double statValue;
-  const StatWidget(this.statDateType, this.statValue, this.goal, {Key? key}) : super(key: key);
+  final bool isGoalUnitVisible;
+  const StatWidget(
+      {required this.statDateType, required this.statValue, required this.goal, required this.isGoalUnitVisible});
 
   @override
   Widget build(BuildContext context) {
+    String tempGoalUnit = goal.getUnit;
+    if (!isGoalUnitVisible) tempGoalUnit = '';
+
     return Column(
       children: [
         Row(
@@ -17,11 +23,11 @@ class StatWidget extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              statValue.toString(),
+              removeDecimalZeroFormat(statValue),
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: black2),
             ),
             Text(
-              goal.getUnit,
+              tempGoalUnit,
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: black2),
             ),
           ],
@@ -43,11 +49,11 @@ class StatWidgetRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      StatWidget(statTitleList[0], statValueList[0], goal),
+      StatWidget(statDateType: statTitleList[0], statValue: statValueList[0], goal: goal, isGoalUnitVisible: false),
       Spacer(),
-      StatWidget(statTitleList[1], statValueList[1], goal),
+      StatWidget(statDateType: statTitleList[1], statValue: statValueList[1], goal: goal, isGoalUnitVisible: false),
       Spacer(),
-      StatWidget(statTitleList[2], statValueList[2], goal),
+      StatWidget(statDateType: statTitleList[2], statValue: statValueList[2], goal: goal, isGoalUnitVisible: false),
     ]);
   }
 }
