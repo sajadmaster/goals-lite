@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:goals_lite/Record/record.dart';
+import 'package:intl/intl.dart';
 
 class RecordChart extends StatelessWidget {
   final List<charts.Series<WeekRecord, String>> seriesList;
 
   RecordChart(this.seriesList);
 
-  factory RecordChart.showWeekData(Future<List<Record>> recordList) {
+  factory RecordChart.showWeekData(AsyncSnapshot<List<Record>> recordList) {
     return RecordChart(
       getWeekData(recordList),
     );
@@ -20,80 +21,55 @@ class RecordChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<WeekRecord, String>> getWeekData(Future<List<Record>> recordList) {
-    final data = [
-      WeekRecord('Mon', 5),
-      WeekRecord('Tue', 25),
-      WeekRecord('Wed', 80),
-      WeekRecord('Thu', 75),
-      WeekRecord('Fri', 0),
-      WeekRecord('Sat', 0),
-      WeekRecord('Sun', 0),
-    ];
-
-    // static const int monday = 1;
-    // static const int tuesday = 2;
-    // static const int wednesday = 3;
-    // static const int thursday = 4;
-    // static const int friday = 5;
-    // static const int saturday = 6;
-    // static const int sunday = 7;
-    // static const int daysPerWeek = 7;
-
-    // get start and end week days
-
+  static List<charts.Series<WeekRecord, String>> getWeekData(AsyncSnapshot<List<Record>> recordList) {
     DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     print('today is $todayDate');
+    List<WeekRecord> weekRecord = [];
+    List<double> valuesOfWeek = List.filled(7, 0);
     List<DateTime> daysOfWeek = List.filled(7, todayDate);
+
     // Generate days of week from Monday (1) to Sunday (7)
+    print('Week Days in daysOfWeek: ');
     for (int i = 1; i < 8; i++) {
       DateTime weekDay = todayDate.subtract(Duration(days: todayDate.weekday - i));
       daysOfWeek[i - 1] = weekDay;
-      print('i is $i and ${daysOfWeek[i - 1]}');
+      print('${i - 1} and ${daysOfWeek[i - 1]}');
     }
 
-    recordList.catchError(
-      (onError) {
-        print("sajad called when there is an error catches error");
-      },
-    ).then((recordList) {
-      // for (Record record in recordList) {
-      //   if (monday.isBefore(record.getDateTime)) {
-      //     print('sajad date is inside 1 week ago: ${record.getDateTime}');
-      //     print(record.getValue);
-      //     print(record.getID);
-      //   }
-      // }
+    print('recordList length is ${recordList.data!.length}');
+    print('recordList length is ${recordList.data![0].getDateTime}');
 
-      // Record findRecord(DateTime dateTime) =>
-      //     recordList.firstWhere((record) => record.getDateTime == DateTime.now().year);
-      // print("called with value = getGoalID " + recordList.first.getGoalID);
-    });
+    print('records value:');
 
-    // recordList.catchError(
-    //   (onError) {
-    //     print("sajad called when there is an error catches error");
-    //   },
-    // ).then((recordList) {
-    //   recordList.where((record) {
-    //     print("called with value = getGoalID " + recordList.first.getGoalID);
+    // Loop through all records and filter them for the selected week
+    Record tempRecord;
+    for (int i = 1; i < recordList.data!.length; i++) {
+      tempRecord = recordList.data![i];
+      print('Record Date ${tempRecord.getDateTime} and record value ${tempRecord.getValue}');
+      for (int i = 0; i < 7; i++) {
+        if (DateOnlyCompareItem(tempRecord.getDateTime).isSameDate(daysOfWeek[i])) {
+          print('Matched date: ${tempRecord.getDateTime} Matched value: ${tempRecord.getDateTime} Matched i: $i');
+          valuesOfWeek[i] += tempRecord.getValue;
+          print('New valuesOfWeek: ${valuesOfWeek[i]} i is $i');
+        }
+      }
+    }
 
-    //     if (_1weekDate.isBefore(record.getDateTime)) {
-    //       print('Found a record: ${record.getDateTime}');
-    //     } else {
-    //       print('Skipped a record: ${record.getDateTime}');
-    //     }
-    //     return false;
-    //   });
-    // });
+    // Weekrecord list: populate
+    for (int i = 0; i < 7; i++) {
+      print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
+      // weekRecord.add(WeekRecord(daysOfWeek[i].weekday.toString(), valuesOfWeek[i].toInt()));
+      weekRecord.add(WeekRecord(DateFormat('EE').format(daysOfWeek[i]), valuesOfWeek[i].toInt()));
+    }
 
+    print('Show empty chart while waiting for the data to load');
     return [
       charts.Series<WeekRecord, String>(
         id: 'Week',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (WeekRecord weekRecord, _) => weekRecord.week,
         measureFn: (WeekRecord weekRecord, _) => weekRecord.value,
-        data: data,
+        data: weekRecord,
       )
     ];
   }
@@ -107,10 +83,33 @@ class WeekRecord {
   WeekRecord(this.week, this.value);
 }
 
+extension DateOnlyCompareItem on DateTime {
+  bool isSameDate(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
+}
 
-      // Record findRecord(DateTime dateTime) => recordList
-      //     .firstWhere((record) => record.getDateTime == DateTime.now().year);
+    // recordList.catchError(
+    //   (onError) {
+    //     print("sajad called when there is an error catches error");
+    //   },
+    // ).then((recordList) {
+    //   // Loop through all records and filter them for the selected week
+    //   print('records value:');
+    //   for (final Record record in recordList) {
+    //     print('Record Date ${record.getDateTime} and record value ${record.getValue}');
+    //     for (int i = 0; i < 7; i++) {
+    //       if (DateOnlyCompareItem(record.getDateTime).isSameDate(daysOfWeek[i])) {
+    //         print('Matched date: ${record.getDateTime} Matched value: ${record.getDateTime} Matched i: $i');
+    //         valuesOfWeek[i] += record.getValue;
+    //         print('New valuesOfWeek: ${valuesOfWeek[i]} i is $i');
+    //       }
+    //     }
+    //   }
 
-      // print("called with value = getGoalID " + recordList.first.getGoalID);
-      // print("called with value = getID " + recordList.first.getID);
-      // print("called with value = getValue " + recordList.first.getValue.toString());
+    //   // Weekrecord list: populate
+    //   for (int i = 0; i < 7; i++) {
+    //     print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
+    //     weekRecord.add(WeekRecord(daysOfWeek[i].weekday.toString(), valuesOfWeek[i].toInt()));
+    //   }
+    // });
