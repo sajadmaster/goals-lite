@@ -3,9 +3,10 @@ import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 
 class StatWidget extends StatefulWidget {
+  String statDateType;
   Goal goal;
-  double todayValue;
-  StatWidget(this.goal, this.todayValue, {Key? key}) : super(key: key);
+  double statValue;
+  StatWidget(this.statDateType, this.goal, this.statValue, {Key? key}) : super(key: key);
 
   @override
   State<StatWidget> createState() => _StatWidgetState();
@@ -21,7 +22,7 @@ class _StatWidgetState extends State<StatWidget> {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              widget.todayValue.toString(),
+              widget.statValue.toString(),
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: black2),
             ),
             Text(
@@ -31,7 +32,7 @@ class _StatWidgetState extends State<StatWidget> {
           ],
         ),
         const SizedBox(height: 2),
-        const Text('Today'),
+        Text(widget.statDateType),
       ],
     );
   }

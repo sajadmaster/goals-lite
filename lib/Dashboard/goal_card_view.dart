@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Dashboard/dashboard_no_content_view.dart';
-import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
 import 'package:goals_lite/Record/record.dart';
 import 'package:goals_lite/_shared/statistics_column_widget.dart';
 import 'package:goals_lite/Goal/goal.dart';
@@ -47,21 +43,27 @@ class _GoalCardState extends State<GoalCard> {
               ),
             ),
             const Spacer(),
+            // Statistics: Today, Month, Total
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: FutureBuilder<List<Record>>(
                   future: recordsListFuture,
                   builder: (BuildContext context, AsyncSnapshot<List<Record>> rl) {
                     if (rl.hasData) {
-                      print('sajad rl.hasData');
                       List<Record>? recordsList = rl.data;
                       if (recordsList != null && recordsList.isNotEmpty) {
-                        print('recordsList Date: ${recordsList[0].getDateTime}');
-                        return Row(children: [Stats(recordsList).getTodayStatsWidget()]);
-                        // return Row(children: [Text('goooooood')]);
+                        // Goal goal = Goal(name: 'name', unit: 'unit');
+
+                        List<double> statValuesList = Stats(recordsList).getTodayStatsWidget();
+                        return Row(children: [
+                          StatWidget('Today', widget.goal, statValuesList[0]),
+                          Spacer(),
+                          StatWidget('Month', widget.goal, statValuesList[1]),
+                          Spacer(),
+                          StatWidget('Total', widget.goal, statValuesList[2]),
+                        ]);
                       }
                     } else if (rl.hasError) {
-                      // return DashboardNoContent();
                       print('Sajad hasError: ${rl.error}');
                       return Text('${rl.error}');
                     }

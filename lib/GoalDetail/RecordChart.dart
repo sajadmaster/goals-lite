@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:goals_lite/Record/record.dart';
 import 'package:intl/intl.dart';
+import 'package:goals_lite/_shared/my_classes.dart';
 
 class RecordChart extends StatelessWidget {
   final List<charts.Series<WeekRecord, String>> seriesList;
@@ -80,10 +81,4 @@ class WeekRecord {
   final int value;
 
   WeekRecord(this.week, this.value);
-}
-
-extension DateOnlyCompareItem on DateTime {
-  bool isSameDate(DateTime other) {
-    return year == other.year && month == other.month && day == other.day;
-  }
 }
