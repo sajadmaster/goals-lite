@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Record/record.dart';
+import 'package:goals_lite/models/goal.dart';
+import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:goals_lite/_shared/statistics_column_widget.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/Dashboard/three_dot_dropdown.dart';
 import 'package:goals_lite/_shared/statistics_controller.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_no_content_view.dart';
 import 'package:goals_lite/Dashboard/dashboard_with_content_view.dart';
-import 'package:goals_lite/Goal/goal.dart';
+import 'package:goals_lite/models/goal.dart';
 
 class DoashboardBody extends StatefulWidget {
   const DoashboardBody({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_classes.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/models/goal.dart';
 
 class StatWidget extends StatelessWidget {
   final String statDateType;

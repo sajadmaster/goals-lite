@@ -1,11 +1,10 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
 import 'package:goals_lite/GoalDetail/RecordChart.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
-import 'package:goals_lite/Record/record.dart';
+import 'package:goals_lite/models/goal.dart';
+import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:goals_lite/_shared/statistics_column_widget.dart';

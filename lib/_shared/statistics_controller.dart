@@ -1,4 +1,4 @@
-import 'package:goals_lite/Record/record.dart';
+import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_classes.dart';
 
 class Stats {

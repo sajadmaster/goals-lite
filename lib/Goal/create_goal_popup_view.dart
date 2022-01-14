@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
+import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
-import 'goal.dart';
 
 class CreateGoalPopUp extends StatefulWidget {
   const CreateGoalPopUp({Key? key}) : super(key: key);

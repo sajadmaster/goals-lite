@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/goal_card_view.dart';
 import 'package:goals_lite/Goal/create_goal_popup_view.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/GoalDetail/goal_detail_main_view.dart';
+import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';

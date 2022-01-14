@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
+import 'package:goals_lite/models/goal.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'goal_delete_alert.dart';

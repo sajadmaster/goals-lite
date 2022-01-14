@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
+import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';

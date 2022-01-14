@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:goals_lite/Goal/goal.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
+import 'package:goals_lite/models/goal.dart';
 
 class Record {
   Record({this.ID, required this.dateTime, required this.value, required this.goalID});
