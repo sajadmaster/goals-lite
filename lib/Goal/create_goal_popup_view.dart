@@ -70,7 +70,7 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                       Goal goal = Goal(name: goalNameController.text, unit: goalUnitController.text);
 
                       // String response = await Goal.add(goal);
-                      String response = await Goal.addHive(goal);
+                      String response = await Goal.add(goal);
                       print('response $response');
 
                       if (response == EMPTY_TEXTFIELD_ERR) {

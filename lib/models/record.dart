@@ -2,14 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/models/goal.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'record.g.dart';
+
+@HiveType(typeId: 1) //Add this Line
 class Record {
-  Record({this.ID, required this.dateTime, required this.value, required this.goalID});
-
+  @HiveField(0)
   String? ID;
+  @HiveField(1)
   DateTime dateTime;
+  @HiveField(2)
   double value;
-  String goalID;
+  @HiveField(3)
+  int goalID;
+
+  Record({this.ID, required this.dateTime, required this.value, required this.goalID});
 
   get getID => this.ID;
   set setID(id) => this.ID = id;
@@ -22,21 +30,34 @@ class Record {
 
   // Add Record
   static Future<String> add(Record record) async {
-    String userID = FirebaseAuth.instance.currentUser!.uid;
+    if (record.getValue == null) {
+      return EMPTY_TEXTFIELD_ERR;
+    }
+    print('record data before save: Value: ${record.getValue} goalID: ${record.getGoalID}');
 
-    // Firestore Add Record
-    CollectionReference records = FirebaseFirestore.instance.collection('records');
-    await records
-        .add({
-          'recordValue': record.getValue,
-          'recordDateTime': record.getDateTime,
-          'userID': userID,
-          'goalID': record.getGoalID,
-        })
-        .then((value) => print("value $value"))
-        .catchError((error) => print("Failed to add Record: $error"));
+    Box recordBox = await Hive.openBox<Record>('recordBox');
+    recordBox.add(record);
+    Record recordNew = recordBox.get(0);
+    print('Sajad recordNew: ${recordNew.getValue}');
     return SUCCESS;
   }
+
+  // static Future<String> add(Record record) async {
+  //   String userID = FirebaseAuth.instance.currentUser!.uid;
+
+  //   // Firestore Add Record
+  //   CollectionReference records = FirebaseFirestore.instance.collection('records');
+  //   await records
+  //       .add({
+  //         'recordValue': record.getValue,
+  //         'recordDateTime': record.getDateTime,
+  //         'userID': userID,
+  //         'goalID': record.getGoalID,
+  //       })
+  //       .then((value) => print("value $value"))
+  //       .catchError((error) => print("Failed to add Record: $error"));
+  //   return SUCCESS;
+  // }
 
   static Future<String> delete(Record record) {
     print('Request deleting recordID: ${record.getID}');
@@ -48,12 +69,19 @@ class Record {
         .catchError((error) => FAILED_DELETE_GOAL);
   }
 
+  static Future<Iterable<Record>> getRecordListHive(Goal goal) async {
+    Box recordBox = await Hive.openBox<Record>('recordBox');
+    Iterable<Record> recordList = recordBox.values as Iterable<Record>;
+    return recordList.where((record) => record.getGoalID == goal.key);
+    // .forEach((record) => print('Found Record: GoalID: ${record.getGoalID} Value: ${record.getValue}'));
+  }
+
   static Future<List<Record>> getRecordList(Goal goal) async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("records")
         .where('userID', isEqualTo: userID)
-        .where('goalID', isEqualTo: goal.getID)
+        .where('goalID', isEqualTo: goal.key)
         .get();
     List<Record> recordsList = querySnapshot.docs
         .map(
@@ -61,7 +89,7 @@ class Record {
               ID: doc.reference.id,
               value: doc["recordValue"],
               dateTime: doc['recordDateTime'].toDate(),
-              goalID: doc['goalID']),
+              goalID: int.parse(doc['goalID'])),
         )
         .toList();
     return recordsList;

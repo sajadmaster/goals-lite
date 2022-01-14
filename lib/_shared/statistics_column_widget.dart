@@ -42,18 +42,21 @@ class StatWidget extends StatelessWidget {
 class StatWidgetRow extends StatelessWidget {
   final List<String> statTitleList;
 
-  final List<double> statValueList;
+  final Iterable<double> statValueList;
   final Goal goal;
   const StatWidgetRow(this.statTitleList, this.statValueList, this.goal);
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      StatWidget(statDateType: statTitleList[0], statValue: statValueList[0], goal: goal, isGoalUnitVisible: false),
+      StatWidget(
+          statDateType: statTitleList[0], statValue: statValueList.elementAt(0), goal: goal, isGoalUnitVisible: false),
       Spacer(),
-      StatWidget(statDateType: statTitleList[1], statValue: statValueList[1], goal: goal, isGoalUnitVisible: false),
+      StatWidget(
+          statDateType: statTitleList[1], statValue: statValueList.elementAt(1), goal: goal, isGoalUnitVisible: false),
       Spacer(),
-      StatWidget(statDateType: statTitleList[2], statValue: statValueList[2], goal: goal, isGoalUnitVisible: false),
+      StatWidget(
+          statDateType: statTitleList[2], statValue: statValueList.elementAt(2), goal: goal, isGoalUnitVisible: false),
     ]);
   }
 }

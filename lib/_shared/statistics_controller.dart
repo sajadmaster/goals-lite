@@ -2,7 +2,7 @@ import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_classes.dart';
 
 class Stats {
-  final List<Record> recordList;
+  final Iterable<Record> recordList;
   Stats(this.recordList);
 
   List<double> getTodayStatsWidget() {

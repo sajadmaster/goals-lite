@@ -91,7 +91,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                       if (recordValueController.text != '') {
                         print('Save button. widget.date: $date');
                         Record record = Record(
-                            dateTime: date, value: double.parse(recordValueController.text), goalID: widget.goal.getID);
+                            dateTime: date, value: double.parse(recordValueController.text), goalID: widget.goal.key);
                         await Record.add(record);
                         Navigator.pushReplacement(
                           context,

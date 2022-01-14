@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/models/goal.dart';
+import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,13 +10,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Hive Database Initialization
-  // await Hive.initFlutter().whenComplete(() => print('Sajad Hive.initFlutter done'));
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   // Registering adapters
   Hive.registerAdapter(GoalAdapter());
-  // Opening boxes
-  // await Hive.openBox<GoalAdapter>('goalBox');
+  Hive.registerAdapter(RecordAdapter());
+
+  // Delete all data from boxes
+  // Box goalBox = await Hive.openBox<Goal>('goalBox');
+  // goalBox.deleteFromDisk();
+  // Box recordBox = await Hive.openBox<Record>('recordBox');
+  // recordBox.deleteFromDisk();
 
   runApp(MyApp());
 }

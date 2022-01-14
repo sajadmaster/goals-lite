@@ -11,14 +11,13 @@ class DoashboardBody extends StatefulWidget {
 }
 
 class _DoashboardBodyState extends State<DoashboardBody> {
-  final Future<List<Goal>> goalsListFuture = Goal.getGoalsList(); // WARNING: MAYBE HIGH NETWORK USAGE
-  final Future<Iterable<Goal>> goalListFutureHive = Goal.getAll(); // WARNING: MAYBE HIGH NETWORK USAGE
+  final Future<Iterable<Goal>> goalListFuture = Goal.getAll();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<Iterable<Goal>>(
-        future: goalListFutureHive,
+        future: goalListFuture,
         builder: (BuildContext context, AsyncSnapshot<Iterable<Goal>> gl) {
           if (gl.hasData) {
             Iterable<Goal>? goalsList = gl.data;

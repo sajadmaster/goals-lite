@@ -9,7 +9,7 @@ class RecordChart extends StatelessWidget {
 
   RecordChart(this.seriesList);
 
-  factory RecordChart.showWeekData(List<Record> recordList) {
+  factory RecordChart.showWeekData(Iterable<Record> recordList) {
     return RecordChart(
       getWeekData(recordList),
     );
@@ -22,7 +22,7 @@ class RecordChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<WeekRecord, String>> getWeekData(List<Record> recordList) {
+  static List<charts.Series<WeekRecord, String>> getWeekData(Iterable<Record> recordList) {
     DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     // print('today is $todayDate');
     List<WeekRecord> weekRecord = [];
@@ -44,7 +44,7 @@ class RecordChart extends StatelessWidget {
     // Loop through all records and filter them for the selected week
     Record tempRecord;
     for (int i = 1; i < recordList.length; i++) {
-      tempRecord = recordList[i];
+      tempRecord = recordList.elementAt(i);
       // print('Record Date ${tempRecord.getDateTime} and record value ${tempRecord.getValue}');
       for (int i = 0; i < 7; i++) {
         if (DateOnlyCompareItem(tempRecord.getDateTime).isSameDate(daysOfWeek[i])) {

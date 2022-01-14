@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
 import 'package:goals_lite/GoalDetail/RecordChart.dart';
@@ -22,6 +21,8 @@ class GoalDetail extends StatefulWidget {
 class _GoalDetailState extends State<GoalDetail> {
   @override
   Widget build(BuildContext context) {
+    final Future<Iterable<Record>> recordListFuture = Record.getRecordListHive(widget.goal);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appbar(context, widget),
@@ -31,13 +32,13 @@ class _GoalDetailState extends State<GoalDetail> {
           Expanded(
             flex: 8,
             child: FutureBuilder(
-                future: Record.getRecordList(widget.goal),
-                builder: (context, AsyncSnapshot<List<Record>> rl) {
+                future: recordListFuture,
+                builder: (context, AsyncSnapshot<Iterable<Record>> rl) {
                   if (!rl.hasData) {
                     return const Center(child: Text('Loading data...'));
                   } else {
-                    List<Record>? recordList = rl.data;
-                    List<double> statValuesList = Stats(recordList!).getTodayStatsWidget();
+                    Iterable<Record>? recordList = rl.data;
+                    Iterable<double> statValuesList = Stats(recordList!).getTodayStatsWidget();
 
                     return Column(
                       children: [
@@ -88,7 +89,8 @@ class _GoalDetailState extends State<GoalDetail> {
                                     child: ListView.builder(
                                         itemCount: recordList.length,
                                         itemBuilder: (BuildContext context, int index) {
-                                          return RecordCard(record: recordList[index], goalUnit: widget.goal.getUnit);
+                                          return RecordCard(
+                                              record: recordList.elementAt(index), goalUnit: widget.goal.getUnit);
                                         }),
                                   ),
                                 ],
