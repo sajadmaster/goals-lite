@@ -16,10 +16,10 @@ class GoalCard extends StatefulWidget {
 }
 
 class _GoalCardState extends State<GoalCard> {
-  late Future<List<Record>> recordsListFuture;
+  late Future<Iterable<Record>> recordsListFuture;
   @override
   void initState() {
-    recordsListFuture = Record.getRecordList(widget.goal); // WARNING: MAYBE HIGH NETWORK USAGE
+    recordsListFuture = Record.getRecordListHive(widget.goal); // WARNING: MAYBE HIGH NETWORK USAGE
     super.initState();
   }
 
@@ -47,12 +47,12 @@ class _GoalCardState extends State<GoalCard> {
             // Statistics: Today, Month, Total
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: FutureBuilder<List<Record>>(
+              child: FutureBuilder<Iterable<Record>>(
                   future: recordsListFuture,
-                  builder: (BuildContext context, AsyncSnapshot<List<Record>> rl) {
+                  builder: (BuildContext context, AsyncSnapshot<Iterable<Record>> rl) {
                     if (rl.hasData) {
-                      List<Record>? recordList = rl.data;
-                      List<double> statValueList = Stats(recordList!).getTodayStatsWidget();
+                      Iterable<Record>? recordList = rl.data;
+                      Iterable<double> statValueList = Stats(recordList!).getTodayStatsWidget();
                       return StatWidgetRow(STAT_TITLE_LIST, statValueList, widget.goal);
                     } else if (rl.hasError) {
                       print('Sajad hasError: ${rl.error}');

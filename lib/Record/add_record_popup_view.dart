@@ -61,11 +61,11 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                 controller: recordValueController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 style: const TextStyle(fontSize: 18),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: ENTER_DATA_HERE,
                   hintText: '0.0',
-                  suffixText: 'hr',
+                  suffixText: widget.goal.getUnit,
                 ),
               ),
               const SizedBox(height: 5),

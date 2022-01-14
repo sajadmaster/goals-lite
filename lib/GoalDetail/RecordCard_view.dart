@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/GoalDetail/ThreeDots_recordCard.dart';
+import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:intl/intl.dart';
 
 class RecordCard extends StatelessWidget {
   final Record record;
-  final String goalUnit;
-  const RecordCard({Key? key, required this.record, required this.goalUnit}) : super(key: key);
+  final Goal goal;
+  const RecordCard({Key? key, required this.record, required this.goal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +31,14 @@ class RecordCard extends StatelessWidget {
                     style: const TextStyle(color: black2, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
-                  ThreeDots_recordCard(context, record),
+                  ThreeDots_recordCard(context, record, goal),
                 ],
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                record.getValue.toString() + ' ' + goalUnit,
+                record.getValue.toString() + ' ' + goal.getUnit,
                 style: TextStyle(color: black2, fontSize: 16),
               ),
             ],

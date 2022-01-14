@@ -89,8 +89,7 @@ class _GoalDetailState extends State<GoalDetail> {
                                     child: ListView.builder(
                                         itemCount: recordList.length,
                                         itemBuilder: (BuildContext context, int index) {
-                                          return RecordCard(
-                                              record: recordList.elementAt(index), goalUnit: widget.goal.getUnit);
+                                          return RecordCard(record: recordList.elementAt(index), goal: widget.goal);
                                         }),
                                   ),
                                 ],

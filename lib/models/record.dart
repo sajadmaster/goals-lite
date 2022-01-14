@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -7,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'record.g.dart';
 
 @HiveType(typeId: 1) //Add this Line
-class Record {
+class Record extends HiveObject {
   @HiveField(0)
   String? ID;
   @HiveField(1)
@@ -34,11 +32,8 @@ class Record {
       return EMPTY_TEXTFIELD_ERR;
     }
     print('record data before save: Value: ${record.getValue} goalID: ${record.getGoalID}');
-
     Box recordBox = await Hive.openBox<Record>('recordBox');
     recordBox.add(record);
-    Record recordNew = recordBox.get(0);
-    print('Sajad recordNew: ${recordNew.getValue}');
     return SUCCESS;
   }
 
@@ -59,59 +54,34 @@ class Record {
   //   return SUCCESS;
   // }
 
-  static Future<String> delete(Record record) {
-    print('Request deleting recordID: ${record.getID}');
-    CollectionReference recordsCollection = FirebaseFirestore.instance.collection('records');
-    return recordsCollection
-        .doc(record.getID)
-        .delete()
-        .then((value) => SUCCESS)
-        .catchError((error) => FAILED_DELETE_GOAL);
+  static deleteRecord(Record record) async {
+    Box recordBox = await Hive.openBox<Record>('recordBox');
+    recordBox.delete(record.key);
   }
 
   static Future<Iterable<Record>> getRecordListHive(Goal goal) async {
     Box recordBox = await Hive.openBox<Record>('recordBox');
     Iterable<Record> recordList = recordBox.values as Iterable<Record>;
     return recordList.where((record) => record.getGoalID == goal.key);
-    // .forEach((record) => print('Found Record: GoalID: ${record.getGoalID} Value: ${record.getValue}'));
   }
 
-  static Future<List<Record>> getRecordList(Goal goal) async {
-    String userID = FirebaseAuth.instance.currentUser!.uid;
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("records")
-        .where('userID', isEqualTo: userID)
-        .where('goalID', isEqualTo: goal.key)
-        .get();
-    List<Record> recordsList = querySnapshot.docs
-        .map(
-          (doc) => Record(
-              ID: doc.reference.id,
-              value: doc["recordValue"],
-              dateTime: doc['recordDateTime'].toDate(),
-              goalID: int.parse(doc['goalID'])),
-        )
-        .toList();
-    return recordsList;
-  }
-
-  // static Future<List<Record>> getAllRecords(Goal goal) async {
+  // static Future<List<Record>> getRecordList(Goal goal) async {
   //   String userID = FirebaseAuth.instance.currentUser!.uid;
   //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
   //       .collection("records")
   //       .where('userID', isEqualTo: userID)
+  //       .where('goalID', isEqualTo: goal.key)
   //       .get();
-  //   List<Record> allRecordsList = querySnapshot.docs
+  //   List<Record> recordsList = querySnapshot.docs
   //       .map(
   //         (doc) => Record(
   //             ID: doc.reference.id,
   //             value: doc["recordValue"],
   //             dateTime: doc['recordDateTime'].toDate(),
-  //             goalID: doc['goalID']),
+  //             goalID: int.parse(doc['goalID'])),
   //       )
   //       .toList();
-  //   print('Sajad allRecordsList is: ${allRecordsList.length}');
-  //   return allRecordsList;
+  //   return recordsList;
   // }
 
   // Get Today
