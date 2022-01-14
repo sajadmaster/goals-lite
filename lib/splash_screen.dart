@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/Signin/signin_view.dart';
+import 'package:hive/hive.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,9 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     Firebase.initializeApp().whenComplete(() => isUserSignedin(context));
-    // Firebase.initializeApp().whenComplete(() => _signOut());
-    WidgetsFlutterBinding.ensureInitialized();
   }
 
   @override

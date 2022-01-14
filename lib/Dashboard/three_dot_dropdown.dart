@@ -26,15 +26,14 @@ Widget ThreeVertDots_goalCard(context, Goal goal) {
         else if (value == 2) {
           bool? isDeleteGoal = await DeleteGoalAlert(context);
           if (isDeleteGoal!) {
-            String response = await Goal.delete(goal);
+            String response = await Goal.deleteFirebase(goal);
             if (response == FAILED_DELETE_GOAL) {
               print(FAILED_DELETE_GOAL);
             } else if (response == SUCCESS) {
               Navigator.pushReplacement(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) =>
-                      const DashboardPage(),
+                  pageBuilder: (context, animation1, animation2) => const DashboardPage(),
                   transitionDuration: Duration.zero,
                 ),
               );

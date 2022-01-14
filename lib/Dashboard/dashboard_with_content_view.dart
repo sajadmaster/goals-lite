@@ -9,7 +9,7 @@ import 'package:goals_lite/_shared/my_strings.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DashboardWithContent extends StatefulWidget {
-  final List<Goal> goalsList;
+  final Iterable<Goal> goalsList;
 
   const DashboardWithContent(this.goalsList, {Key? key}) : super(key: key);
 
@@ -39,12 +39,12 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
                   return GestureDetector(
                     // Goal Card
                     child: GoalCard(
-                      goal: widget.goalsList[index],
+                      goal: widget.goalsList.elementAt(index),
                     ),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GoalDetail(widget.goalsList[index])),
+                        MaterialPageRoute(builder: (context) => GoalDetail(widget.goalsList.elementAt(index))),
                       );
                     },
                   );
