@@ -101,6 +101,11 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                         Record record = Record(
                             dateTime: date, value: double.parse(recordValueController.text), goalID: widget.goal.key);
                         await Record.add(record);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => GoalDetail(widget.goal)),
+                        //   (Route<dynamic> route) => false,
+                        // );
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(

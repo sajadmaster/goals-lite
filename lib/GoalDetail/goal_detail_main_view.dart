@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
 import 'package:goals_lite/GoalDetail/RecordChart.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
@@ -111,6 +112,19 @@ class _GoalDetailState extends State<GoalDetail> {
 // ######### Appbar
 PreferredSizeWidget appbar(context, GoalDetail widget) {
   return AppBar(
+    // Appbar: Back button
+    leading: IconButton(
+      icon: Icon(Icons.arrow_back, color: Colors.black),
+      onPressed: () => {
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+            transitionDuration: Duration.zero,
+          ),
+        )
+      },
+    ),
     // Appbar: Title text
     title: Text(
       widget.goal.getName,
