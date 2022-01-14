@@ -21,7 +21,7 @@ class GoalDetail extends StatefulWidget {
 class _GoalDetailState extends State<GoalDetail> {
   @override
   Widget build(BuildContext context) {
-    final Future<Iterable<Record>> recordListFuture = Record.getRecordListHive(widget.goal);
+    final Future<Iterable<Record>> recordListFuture = Record.getRecordList(widget.goal);
 
     return Scaffold(
       backgroundColor: Colors.white,

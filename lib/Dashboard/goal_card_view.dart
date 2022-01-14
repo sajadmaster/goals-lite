@@ -19,7 +19,7 @@ class _GoalCardState extends State<GoalCard> {
   late Future<Iterable<Record>> recordsListFuture;
   @override
   void initState() {
-    recordsListFuture = Record.getRecordListHive(widget.goal); // WARNING: MAYBE HIGH NETWORK USAGE
+    recordsListFuture = Record.getRecordList(widget.goal); // WARNING: MAYBE HIGH NETWORK USAGE
     super.initState();
   }
 

@@ -34,18 +34,6 @@ Widget ThreeVertDots_goalCard(context, Goal goal) {
                 transitionDuration: Duration.zero,
               ),
             );
-            // String response = await Goal.deleteGoal(goal);
-            // if (response == FAILED_DELETE_GOAL) {
-            //   print(FAILED_DELETE_GOAL);
-            // } else if (response == SUCCESS) {
-            //   Navigator.pushReplacement(
-            //     context,
-            //     PageRouteBuilder(
-            //       pageBuilder: (context, animation1, animation2) => const DashboardPage(),
-            //       transitionDuration: Duration.zero,
-            //     ),
-            //   );
-            // }
           }
         }
       },

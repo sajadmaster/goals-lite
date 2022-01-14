@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goals_lite/_shared/my_constants.dart';
+import 'package:goals_lite/models/record.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 
@@ -44,7 +43,17 @@ class Goal extends HiveObject {
   }
 
   static deleteGoal(Goal goal) async {
+    // Delete records linked with this goal
+    Box recordBox = await Hive.openBox<Record>('recordBox');
+    Iterable<Record> recordList = await Record.getRecordList(goal);
+    for (Record record in recordList) {
+      print('Record Deleted: GoalID: ${record.getGoalID} Key ${record.key}');
+
+      recordBox.delete(record.key);
+    }
     Box goalBox = await Hive.openBox<Goal>('goalBox');
+    print('Goal Deleted: Key: ${goal.key}');
+
     goalBox.delete(goal.key);
   }
 }
