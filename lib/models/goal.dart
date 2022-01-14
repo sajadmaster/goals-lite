@@ -21,15 +21,10 @@ class Goal extends HiveObject {
   set setUnit(goalUnit) => this.unit = goalUnit;
 
 // Add Goal
-  static Future<String> add(Goal goal) async {
-    if (goal.getName == '' && goal.getUnit == '') {
-      return EMPTY_TEXTFIELD_ERR;
-    }
-
+  static add(Goal goal) async {
     Box goalBox = await Hive.openBox<Goal>('goalBox');
     goalBox.add(goal);
     print('Goal key is: ${goal.key}');
-    return SUCCESS;
   }
 
   static Future<Iterable<Goal>> getAll() async {

@@ -19,6 +19,14 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
   static TextEditingController goalUnitController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize variables
+    goalNameController.text = '';
+    goalUnitController.text = '';
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: MediaQuery.of(context).viewInsets,
@@ -68,24 +76,20 @@ class _CreateGoalPopUpState extends State<CreateGoalPopUp> {
                     buttonText: SAVE,
                     onPress: () async {
                       Goal goal = Goal(name: goalNameController.text, unit: goalUnitController.text);
-
-                      // String response = await Goal.add(goal);
-                      String response = await Goal.add(goal);
-                      print('response $response');
-
-                      if (response == EMPTY_TEXTFIELD_ERR) {
+                      if (goal.getName == '' || goal.getUnit == '') {
                         setState(() {
                           isErrorVisible = true;
                         });
-                      } else if (response == SUCCESS) {
-                        Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
-                            transitionDuration: Duration.zero,
-                          ),
-                        );
+                        return;
                       }
+                      await Goal.add(goal);
+                      Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
                     },
                   ),
                 ],

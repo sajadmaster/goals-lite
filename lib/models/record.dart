@@ -28,9 +28,6 @@ class Record extends HiveObject {
 
   // Add Record
   static Future<String> add(Record record) async {
-    if (record.getValue == null) {
-      return EMPTY_TEXTFIELD_ERR;
-    }
     Box recordBox = await Hive.openBox<Record>('recordBox');
     recordBox.add(record);
     return SUCCESS;

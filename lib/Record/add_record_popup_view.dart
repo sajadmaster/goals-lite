@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
+import 'package:goals_lite/GoalDetail/goal_detail_main_view.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
@@ -19,6 +20,13 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
   bool isErrorVisible = false;
   static TextEditingController recordValueController = TextEditingController();
   DateTime date = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    date = DateTime(date.year, date.month, date.day);
+    recordValueController.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +104,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DashboardPage(),
+                            pageBuilder: (context, animation1, animation2) => GoalDetail(widget.goal),
                             transitionDuration: Duration.zero,
                           ),
                         );
