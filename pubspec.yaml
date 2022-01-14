@@ -1,7 +1,7 @@
 # arch -x86_64 pod install --repo-update
 
 name: goals_lite
-description: A new Flutter project.
+description: Goals lite is a simple tool that helps you manage your goals.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1+1
 
