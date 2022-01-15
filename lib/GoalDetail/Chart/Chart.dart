@@ -3,15 +3,22 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:goals_lite/models/record.dart';
 import 'package:intl/intl.dart';
 import 'package:goals_lite/_shared/my_classes.dart';
+import 'WeekDataGenerator.dart';
 
 class RecordChart extends StatelessWidget {
-  final List<charts.Series<WeekRecord, String>> seriesList;
+  final List<charts.Series<ChartDataModel, String>> seriesList;
 
   RecordChart(this.seriesList);
 
   factory RecordChart.showWeekData(Iterable<Record> recordList) {
     return RecordChart(
-      getWeekData(recordList),
+      WeekDataGenerator(recordList),
+    );
+  }
+
+  factory RecordChart.showMonthData(Iterable<Record> recordList) {
+    return RecordChart(
+      getMonthData(recordList),
     );
   }
 
@@ -22,10 +29,12 @@ class RecordChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<WeekRecord, String>> getWeekData(Iterable<Record> recordList) {
+  // ############### Month
+  static List<charts.Series<ChartDataModel, String>> getMonthData(Iterable<Record> recordList) {
     DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
     // print('today is $todayDate');
-    List<WeekRecord> weekRecord = [];
+    List<ChartDataModel> weekRecord = [];
     List<double> valuesOfWeek = List.filled(7, 0);
     List<DateTime> daysOfWeek = List.filled(7, todayDate);
 
@@ -57,26 +66,25 @@ class RecordChart extends StatelessWidget {
     // Weekrecord list: populate
     for (int i = 0; i < 7; i++) {
       // print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
-      weekRecord.add(WeekRecord(DateFormat('EE').format(daysOfWeek[i]), valuesOfWeek[i].toInt()));
+      weekRecord.add(ChartDataModel(DateFormat('EE').format(daysOfWeek[i]), valuesOfWeek[i].toInt()));
     }
 
     // print('Show empty chart while waiting for the data to load');
     return [
-      charts.Series<WeekRecord, String>(
+      charts.Series<ChartDataModel, String>(
         id: 'Week',
         colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
-        domainFn: (WeekRecord weekRecord, _) => weekRecord.week,
-        measureFn: (WeekRecord weekRecord, _) => weekRecord.value,
+        domainFn: (ChartDataModel weekRecord, _) => weekRecord.horiValue,
+        measureFn: (ChartDataModel weekRecord, _) => weekRecord.vertiValue,
         data: weekRecord,
       )
     ];
   }
 }
 
-/// Sample ordinal data type.
-class WeekRecord {
-  final String week;
-  final int value;
+class ChartDataModel {
+  final String horiValue;
+  final int vertiValue;
 
-  WeekRecord(this.week, this.value);
+  ChartDataModel(this.horiValue, this.vertiValue);
 }

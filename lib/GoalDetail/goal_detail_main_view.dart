@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
-import 'package:goals_lite/GoalDetail/RecordChart.dart';
+import 'package:goals_lite/GoalDetail/Chart/Chart.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
