@@ -35,3 +35,6 @@ const DELETE_RECORD = 'Delete Record';
 const WEEK = 'Week';
 const MONTH = 'Month';
 const YEAR = 'Year';
+const STATISTICS = 'Statistics';
+const DATA = 'Data';
+const LOADING_DATA = 'Loading data...';

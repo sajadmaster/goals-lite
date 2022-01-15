@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
-import 'package:goals_lite/GoalDetail/Chart/Chart.dart';
+import 'package:goals_lite/GoalDetail/Chart/Chart_controller.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
@@ -11,7 +11,7 @@ import 'package:goals_lite/_shared/statistics_column_widget.dart';
 import 'package:goals_lite/_shared/statistics_controller.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import 'ChartTabbar_view.dart';
+import 'Chart/ChartTabbar_view.dart';
 
 class GoalDetail extends StatefulWidget {
   final Goal goal;
@@ -38,7 +38,7 @@ class _GoalDetailState extends State<GoalDetail> {
                 future: recordListFuture,
                 builder: (context, AsyncSnapshot<Iterable<Record>> rl) {
                   if (!rl.hasData) {
-                    return const Center(child: Text('Loading data...'));
+                    return const Center(child: Text(LOADING_DATA));
                   } else {
                     Iterable<Record>? recordList = rl.data;
                     Iterable<double> statValuesList = Stats(recordList!).getTodayStatsWidget();
@@ -48,7 +48,7 @@ class _GoalDetailState extends State<GoalDetail> {
                         const SizedBox(height: 15),
                         // Statistics
                         const Text(
-                          'Statistics',
+                          '  ' + STATISTICS,
                           style: TextStyle(color: black2),
                         ),
                         const SizedBox(height: 10),
@@ -86,7 +86,7 @@ class _GoalDetailState extends State<GoalDetail> {
                               child: Column(
                                 children: [
                                   const Text(
-                                    'Data',
+                                    DATA,
                                     style: TextStyle(color: black2),
                                   ),
                                   // Data

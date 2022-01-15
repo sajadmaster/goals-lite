@@ -4,7 +4,8 @@ import 'package:goals_lite/models/record.dart';
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
-List<charts.Series<ChartDataModel, String>> WeekDataGenerator(Iterable<Record> recordList) {
+// ############### Month
+List<charts.Series<ChartDataModel, String>> getMonthData(Iterable<Record> recordList) {
   DateTime todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
   // print('today is $todayDate');

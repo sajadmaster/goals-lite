@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/goal_card_view.dart';
 import 'package:goals_lite/Goal/create_goal_popup_view.dart';
-import 'package:goals_lite/GoalDetail/ChartTabbar_view.dart';
+import 'package:goals_lite/GoalDetail/Chart/ChartTabbar_view.dart';
 import 'package:goals_lite/GoalDetail/goal_detail_main_view.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
