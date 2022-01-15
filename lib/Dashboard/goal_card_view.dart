@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/GoalDetail/Chart/MonthDataGenerator.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
 import 'package:goals_lite/_shared/my_strings.dart';

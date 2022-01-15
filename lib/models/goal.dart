@@ -30,10 +30,7 @@ class Goal extends HiveObject {
   static Future<Iterable<Goal>> getAll() async {
     Box goalBox = await Hive.openBox<Goal>('goalBox');
     Iterable<Goal> goalList = goalBox.values as Iterable<Goal>;
-    print('Sajad total goals: ${goalList.length}');
-    for (Goal goal in goalList) {
-      print('Goal Key: ${goal.key} Goal Name: ${goal.getName}');
-    }
+
     return goalList;
   }
 

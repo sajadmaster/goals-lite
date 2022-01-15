@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
+import 'package:goals_lite/GoalDetail/Chart/barchartest.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
 import 'package:goals_lite/GoalDetail/Chart/Chart_controller.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
@@ -72,7 +73,9 @@ class _GoalDetailState extends State<GoalDetail> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20, right: 10),
-                            child: RecordChart.showWeekData(recordList),
+                            child: RecordChart.showMonthData(recordList),
+                            // child: TimeSeriesBar.withSampleData(),
+                            // child: RecordChart.showWeekData(recordList),
                           ),
                           flex: 3,
                         ),
