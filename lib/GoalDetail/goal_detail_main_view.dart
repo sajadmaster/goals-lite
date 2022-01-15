@@ -24,13 +24,6 @@ class GoalDetail extends StatefulWidget {
 class _GoalDetailState extends State<GoalDetail> {
   int chartType = 0;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   chartType = 0;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final Future<Iterable<Record>> recordListFuture = Record.getRecordList(widget.goal);
