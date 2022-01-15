@@ -37,12 +37,12 @@ getMonthData(Iterable<Record> recordList) {
   // Weekrecord list: populate
   for (int i = 0; i < daysOfMonth.length; i++) {
     // print('Weekrecord: i is: $i value is: ${valuesOfWeek[i]}');
-    monthRecord.add(ChartDataModel(daysOfMonth[i].day.toString(), valuesOfMonth[i].toInt()));
+    monthRecord.add(ChartDataModel(daysOfMonth[i], valuesOfMonth[i].toInt()));
   }
 
   // print('Show empty chart while waiting for the data to load');
   return [
-    charts.Series<ChartDataModel, String>(
+    charts.Series<ChartDataModel, DateTime>(
       id: 'Month',
       colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
       domainFn: (ChartDataModel chartDataModel, _) => chartDataModel.horiValue,
