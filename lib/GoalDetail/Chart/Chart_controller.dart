@@ -16,11 +16,11 @@ class RecordChart extends StatelessWidget {
 
   RecordChart(this.seriesList);
 
-  // factory RecordChart.showWeekData(Iterable<Record> recordList) {
-  //   return RecordChart(
-  //     WeekDataGenerator(recordList),
-  //   );
-  // }
+  factory RecordChart.showWeekData(Iterable<Record> recordList) {
+    return RecordChart(
+      WeekDataGenerator(recordList),
+    );
+  }
 
   factory RecordChart.showMonthData(Iterable<Record> recordList) {
     return RecordChart(

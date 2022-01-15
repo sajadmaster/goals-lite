@@ -1,10 +1,15 @@
 import 'package:cupertino_tabbar/cupertino_tabbar.dart';
 import 'package:flutter/material.dart';
-import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
 
+enum ChartTabEnum {
+  week,
+  month,
+}
+
 class ChartTabbar extends StatefulWidget {
-  ChartTabbar({Key? key}) : super(key: key);
+  final Function onChanged;
+  ChartTabbar({required this.onChanged});
 
   @override
   _ChartTabbarState createState() => _ChartTabbarState();
@@ -31,16 +36,17 @@ class _ChartTabbarState extends State<ChartTabbar> {
             MONTH,
             textAlign: TextAlign.center,
           ),
-          Text(
-            YEAR,
-            textAlign: TextAlign.center,
-          ),
+          // Text(
+          //   YEAR,
+          //   textAlign: TextAlign.center,
+          // ),
         ],
         cupertinoTabBarValueGetter,
         (int index) {
           setState(() {
             cupertinoTabBarValue = index;
-            print('Chart Tabbar Changed to $index');
+            widget.onChanged(index);
+            print('Inside Chart: Tabbar Changed to $index');
           });
         },
         useShadow: false,

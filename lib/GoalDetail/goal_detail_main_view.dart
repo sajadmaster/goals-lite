@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
-import 'package:goals_lite/GoalDetail/Chart/barchartest.dart';
 import 'package:goals_lite/GoalDetail/RecordCard_view.dart';
 import 'package:goals_lite/GoalDetail/Chart/Chart_controller.dart';
 import 'package:goals_lite/Record/add_record_popup_view.dart';
@@ -23,6 +22,15 @@ class GoalDetail extends StatefulWidget {
 }
 
 class _GoalDetailState extends State<GoalDetail> {
+  int chartType = 0;
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   chartType = 0;
+  // }
+
   @override
   Widget build(BuildContext context) {
     final Future<Iterable<Record>> recordListFuture = Record.getRecordList(widget.goal);
@@ -67,15 +75,26 @@ class _GoalDetailState extends State<GoalDetail> {
                         ),
                         const SizedBox(height: 20),
                         // Chart Tabbar
-                        ChartTabbar(),
+                        ChartTabbar(
+                          onChanged: (int index) {
+                            // week = 0, month = 1
+                            if (index == 0) {
+                              setState(() {
+                                chartType = 0;
+                              });
+                            } else if (index == 1) {
+                              setState(() {
+                                chartType = 1;
+                              });
+                            }
+                          },
+                        ),
                         const SizedBox(height: 10),
                         // Chart
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20, right: 10),
-                            child: RecordChart.showMonthData(recordList),
-                            // child: TimeSeriesBar.withSampleData(),
-                            // child: RecordChart.showWeekData(recordList),
+                            child: showChart(recordList, chartType),
                           ),
                           flex: 3,
                         ),
@@ -114,6 +133,17 @@ class _GoalDetailState extends State<GoalDetail> {
         ],
       ),
     );
+  }
+}
+
+showChart(recordList, chartType) {
+  print('inside showChart. chartType is $chartType');
+  if (chartType == 0) {
+    return RecordChart.showWeekData(recordList);
+  } else if (chartType == 1) {
+    return RecordChart.showMonthData(recordList);
+  } else {
+    print('SAJAD ERROR: chartType is invalid');
   }
 }
 
