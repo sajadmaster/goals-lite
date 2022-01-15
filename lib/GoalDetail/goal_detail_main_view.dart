@@ -11,6 +11,8 @@ import 'package:goals_lite/_shared/statistics_column_widget.dart';
 import 'package:goals_lite/_shared/statistics_controller.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import 'ChartTabbar_view.dart';
+
 class GoalDetail extends StatefulWidget {
   final Goal goal;
   GoalDetail(this.goal);
@@ -63,6 +65,9 @@ class _GoalDetailState extends State<GoalDetail> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        // Chart Tabbar
+                        ChartTabbar(),
+                        const SizedBox(height: 10),
                         // Chart
                         Expanded(
                           child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/goal_card_view.dart';
 import 'package:goals_lite/Goal/create_goal_popup_view.dart';
+import 'package:goals_lite/GoalDetail/ChartTabbar_view.dart';
 import 'package:goals_lite/GoalDetail/goal_detail_main_view.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/widgets/button_round_elevated.dart';
@@ -46,7 +47,14 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
                     return TextButton(
                       child: const Text(CREATE_GOAL),
                       onPressed: () {
-                        showBarModalBottomSheet(context: context, builder: (context) => const CreateGoalPopUp());
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) => ChartTabbar(),
+                            transitionDuration: Duration.zero,
+                          ),
+                        );
+                        // showBarModalBottomSheet(context: context, builder: (context) => const CreateGoalPopUp());
                       },
                     );
                   } else {

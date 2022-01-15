@@ -32,3 +32,6 @@ const WELIME_TO_GOALS_LITE = 'Welcome to Goals Lite!';
 
 // Goal Detail
 const DELETE_RECORD = 'Delete Record';
+const WEEK = 'Week';
+const MONTH = 'Month';
+const YEAR = 'Year';

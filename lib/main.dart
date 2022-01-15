@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
@@ -35,6 +36,6 @@ class MyApp extends StatelessWidget {
             button: TextStyle(fontSize: 16.0, color: black2),
           ),
         ),
-        home: SplashScreen());
+        home: DashboardPage());
   }
 }
