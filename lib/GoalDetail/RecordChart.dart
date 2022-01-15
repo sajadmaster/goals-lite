@@ -37,20 +37,19 @@ class RecordChart extends StatelessWidget {
       // print('${i - 1} and ${daysOfWeek[i - 1]}');
     }
 
-    // print('recordList length is ${recordList.length}');
+    print('recordList length is ${recordList.length}');
     // print('recordList length is ${recordList[0].getDateTime}');
-    // print('records value:');
-
+    print('records value:');
     // Loop through all records and filter them for the selected week
     Record tempRecord;
-    for (int i = 1; i < recordList.length; i++) {
+    for (int i = 0; i < recordList.length; i++) {
       tempRecord = recordList.elementAt(i);
-      // print('Record Date ${tempRecord.getDateTime} and record value ${tempRecord.getValue}');
+      print('Record Date ${tempRecord.getDateTime} and record value ${tempRecord.getValue}');
       for (int i = 0; i < 7; i++) {
         if (DateOnlyCompareItem(tempRecord.getDateTime).isSameDate(daysOfWeek[i])) {
-          // print('Matched date: ${tempRecord.getDateTime} Matched value: ${tempRecord.getDateTime} Matched i: $i');
+          print('Matched date: ${tempRecord.getDateTime} Matched value: ${tempRecord.getDateTime} Matched i: $i');
           valuesOfWeek[i] += tempRecord.getValue;
-          // print('New valuesOfWeek: ${valuesOfWeek[i]} i is $i');
+          print('New valuesOfWeek: ${valuesOfWeek[i]} i is $i');
         }
       }
     }

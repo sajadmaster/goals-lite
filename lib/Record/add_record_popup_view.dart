@@ -24,7 +24,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
   @override
   void initState() {
     super.initState();
-    date = DateTime(date.year, date.month, date.day);
+    date = DateTime(date.year, date.month, date.day, date.hour, date.minute);
     recordValueController.text = '';
   }
 
@@ -97,7 +97,7 @@ class _AddRecordPopupState extends State<AddRecordPopup> {
                     onPress: () async {
                       // Save record
                       if (recordValueController.text != '') {
-                        print('Save button. widget.date: $date');
+                        print('Save button. widget.date: $date value: ${recordValueController.text}');
                         Record record = Record(
                             dateTime: date, value: double.parse(recordValueController.text), goalID: widget.goal.key);
                         await Record.add(record);
