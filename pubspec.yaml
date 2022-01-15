@@ -46,3 +46,8 @@ flutter:
     - assets/images/
     - assets/logos/
 
+  fonts:
+    - family: Jalnan
+      fonts:
+        - asset: assets/fonts/Jalnan.ttf
+

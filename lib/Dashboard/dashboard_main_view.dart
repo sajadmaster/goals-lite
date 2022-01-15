@@ -22,16 +22,27 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: false,
-        title: Text(
-          GOOD_LUCK_WITH_YOUR_GOAL,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+        titleSpacing: 30,
+        elevation: 0,
+        title: Row(
+          children: const [
+            Text(
+              GOALS,
+              style: TextStyle(fontSize: 18, fontFamily: 'Jalnan'),
+            ),
+            SizedBox(width: 5),
+            Text(
+              LITE,
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
         ),
         backgroundColor: Colors.transparent,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height - 100,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[50],
           borderRadius: BorderRadius.circular(20),
         ),
         child: DoashboardBody(),

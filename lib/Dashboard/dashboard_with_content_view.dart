@@ -26,42 +26,45 @@ class _DashboardWithContentState extends State<DashboardWithContent> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Text(
-            GOALS,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: black2),
+          Row(
+            children: const [
+              SizedBox(width: 5),
+              Text(
+                GOALS,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: black2),
+              ),
+            ],
           ),
-          SizedBox(height: 9),
+          const SizedBox(height: 9),
           Expanded(
             // Goal Card ListView
             child: ListView.builder(
-                itemCount: widget.goalsList.length,
+                itemCount: widget.goalsList.length + 1,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    // Goal Card
-                    child: GoalCard(
-                      goal: widget.goalsList.elementAt(index),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => GoalDetail(widget.goalsList.elementAt(index))),
-                      );
-                    },
-                  );
+                  // Create Goal Button
+                  if (index == widget.goalsList.length) {
+                    return TextButton(
+                      child: const Text(CREATE_GOAL),
+                      onPressed: () {
+                        showBarModalBottomSheet(context: context, builder: (context) => const CreateGoalPopUp());
+                      },
+                    );
+                  } else {
+                    // Goals List
+                    return GestureDetector(
+                      // Goal Card
+                      child: GoalCard(
+                        goal: widget.goalsList.elementAt(index),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => GoalDetail(widget.goalsList.elementAt(index))),
+                        );
+                      },
+                    );
+                  }
                 }),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 80),
-            // Create Goal Button
-            child: RoundElevatedButton(
-              buttonText: CREATE_GOAL,
-              onPress: () {
-                showBarModalBottomSheet(
-                  context: context,
-                  builder: (context) => CreateGoalPopUp(),
-                );
-              },
-            ),
           ),
         ],
       ),
