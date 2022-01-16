@@ -13,8 +13,8 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
-                sh "rm -rf build_ios"
-                sh "rm -rf build_ios"
+                sh "rm -rf build"
+                sh "rm -rf build"
                 sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git"
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
