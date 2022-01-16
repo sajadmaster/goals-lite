@@ -13,10 +13,8 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
-                sh "echo 'Sajad Current directory is '"
-                ss "pwd"
-                sh "rm -rf goalslite_build_ios" //This removes the previous checkout of build_ios if it exists.
-                sh "rm -rf ios/fastlane/goalslite_build_ios" //This removes the goalslite_build_ios from the fastlane directory if it somehow still exists
+                sh "rm -rf build_ios"
+                sh "rm -rf build_ios"
                 sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git" //This checks out the goalslite_build_ios library from Goals Lite Github
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
@@ -26,23 +24,23 @@ pipeline {
                 sh "flutter doctor -v"
             }
         }
-        stage('Flutter Build iOS') {
-            steps {
-                sh "flutter build ios --release --no-codesign"
-            }
-        }
-        stage('Make iOS IPA And Distribute') {
-                steps {
-                    dir('ios'){
-                            sh "bundle install"
-                            sh "bundle exec fastlane buildAdHoc --verbose" 
-                    }
-                }
-        }
-        stage('Cleanup') {
-            steps {
-                sh "flutter clean"
-            }
-        }
+        // stage('Flutter Build iOS') {
+        //     steps {
+        //         sh "flutter build ios --release --no-codesign"
+        //     }
+        // }
+        // stage('Make iOS IPA And Distribute') {
+        //         steps {
+        //             dir('ios'){
+        //                     sh "bundle install"
+        //                     sh "bundle exec fastlane buildAdHoc --verbose" 
+        //             }
+        //         }
+        // }
+        // stage('Cleanup') {
+        //     steps {
+        //         sh "flutter clean"
+        //     }
+        // }
     }
 }
