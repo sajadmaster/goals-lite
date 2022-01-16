@@ -15,7 +15,7 @@ pipeline {
                 checkout scm
                 sh "rm -rf build_ios"
                 sh "rm -rf build_ios"
-                sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git" //This checks out the goalslite_build_ios library from Goals Lite Github
+                sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git"
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
         }
