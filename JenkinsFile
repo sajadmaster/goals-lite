@@ -1,47 +1,45 @@
-# ! groovy
+def appname = "Runner" //DON'T CHANGE THIS. This refers to the flutter 'Runner' target.
+def xcarchive = "${appname}.xcarchive"
 
 pipeline {
-  agent any
-  stages {
-    stage('Setup') {
-      steps {
-        echo "Setup"
-        // Install bundler in order to use fastlane
-        sh "gem install bundler"
-        // set the local path for bundles in vendor/bundle
-        sh "bundle config set --local path 'vendor/bundle'"
-        // install bundles if they're not installed
-        sh "bundle check || bundle install --jobs=4 --retry=3"
-      }
+    agent { label 'Flutter_Node' } //Change this to whatever your flutter jenkins nodes are labeled.
+    environment {
+        DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer/"  //This is necessary for Fastlane to access iOS Build things.
+        PATH = "/Users/jenkins/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/Caskroom/flutter/2.5.3/flutter/bin:/usr/local/Caskroom/android-sdk/4333796//tools:/usr/local/Caskroom/android-sdk/4333796//platform-tools:/Applications/Xcode.app/Contents/Developer"
     }
-    stage('Build') {
-      steps {
-        echo "Building"
-        sh "bundle exec fastlane build"
-      }
-    }
-    stage('Release to on 3rd party') {
-      when {
-        anyOf {
-          branch "develop";
-          branch "deploy";
+    stages {
+        stage ('Checkout') {
+            steps {
+                step([$class: 'WsCleanup'])
+                checkout scm
+                sh "rm -rf goalslite_build_ios" //This removes the previous checkout of build_ios if it exists.
+                sh "rm -rf ios/fastlane/goalslite_build_ios" //This removes the goalslite_build_ios from the fastlane directory if it somehow still exists
+                sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git" //This checks out the goalslite_build_ios library from Goals Lite Github
+                sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
+            }
         }
-      }
-      steps {
-        echo "Releasing to 3rd party"
-        // Add your 3rd party fastlane command
-        // sh "bundle exec fastlane release_third_party"
-      }
+        stage ('Flutter Doctor') {
+            steps {
+                sh "flutter doctor -v"
+            }
+        }
+        stage('Flutter Build iOS') {
+            steps {
+                sh "flutter build ios --release --no-codesign"
+            }
+        }
+        stage('Make iOS IPA And Distribute') {
+                steps {
+                    dir('ios'){
+                            sh "bundle install"
+                            sh "bundle exec fastlane buildAdHoc --verbose" 
+                    }
+                }
+        }
+        stage('Cleanup') {
+            steps {
+                sh "flutter clean"
+            }
+        }
     }
-    stage('Release to App Store ') {
-      when {
-        branch "master"
-        // by using when we are checking for the branch and running oly if the branch matches
-      }
-      steps {
-        echo "$STAGE_RELEASE_DESCRIPTION"
-        sh "bundle exec fastlane release"
-      }
-    }
-  }
 }
