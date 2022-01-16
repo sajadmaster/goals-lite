@@ -13,6 +13,8 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
+                sh "echo 'Sajad Current directory is '"
+                ss "pwd"
                 sh "rm -rf goalslite_build_ios" //This removes the previous checkout of build_ios if it exists.
                 sh "rm -rf ios/fastlane/goalslite_build_ios" //This removes the goalslite_build_ios from the fastlane directory if it somehow still exists
                 sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git" //This checks out the goalslite_build_ios library from Goals Lite Github
