@@ -24,11 +24,12 @@ pipeline {
                 sh "flutter doctor -v"
             }
         }
-        // stage('Flutter Build iOS') {
-        //     steps {
-        //         sh "flutter build ios --release --no-codesign"
-        //     }
-        // }
+        stage('Flutter Build iOS') {
+            steps {
+                sh "cd ios && arch -x86_64 pod install --repo-update"
+                sh "flutter build ios --release --no-codesign"
+            }
+        }
         // stage('Make iOS IPA And Distribute') {
         //         steps {
         //             dir('ios'){
