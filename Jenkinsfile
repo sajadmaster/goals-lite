@@ -15,15 +15,15 @@ pipeline {
                 checkout scm
                 sh "rm -rf Goals_Lite_deploy"
                 sh "rm -rf build"
-                // sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git"
+                sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git"
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
         }
-        // stage ('Flutter Doctor') {
-        //     steps {
-        //         sh "flutter doctor -v"
-        //     }
-        // }
+        stage ('Flutter Doctor') {
+            steps {
+                sh "flutter doctor -v"
+            }
+        }
         // stage('Flutter Build iOS') {
         //     steps {
         //         sh "flutter build ios --release --no-codesign"
