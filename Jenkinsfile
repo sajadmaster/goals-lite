@@ -6,7 +6,7 @@ pipeline {
     agent { label 'Built-In_Node' } //Change this to whatever your flutter jenkins nodes are labeled.
     environment {
         DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer/" 
-        PATH = "/opt/homebrew/Caskroom/flutter/2.8.1/flutter/bin:/Users/jenkins/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Xcode.app/Contents/Developer"
+        PATH = "/opt/homebrew/Cellar/fastlane/2.201.0/libexec/gems/fastlane-2.201.0/bin/:/opt/homebrew/Caskroom/flutter/2.8.1/flutter/bin:/Users/jenkins/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Xcode.app/Contents/Developer"
     }
     stages {
         stage ('Checkout') {
