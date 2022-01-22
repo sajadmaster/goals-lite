@@ -18,30 +18,27 @@ pipeline {
                 sh "mv goalslite_build_ios ios/fastlane"
             }
         }
-        // stage ('Flutter Doctor') {
-        //     steps {
-        //         sh "flutter doctor -v"
-        //     }
-        // }
-        // stage('Flutter Build iOS') {
-        //     steps {
-        //         sh "flutter pub get"
-        //         sh "cd ios"
-        //         sh "flutter build ios --release --no-codesign"
-        //     }
-        // }
-        // stage('Make iOS IPA And Distribute') {
-        //         steps {
-        //             dir('ios'){
-        //                     sh "bundle install"
-        //                     sh "bundle exec fastlane buildAdHoc --verbose" 
-        //             }
-        //         }
-        // }
-        // stage('Cleanup') {
-        //     steps {
-        //         sh "flutter clean"
-        //     }
-        // }
+        stage ('Flutter Doctor') {
+            steps {
+                sh "flutter doctor -v"
+            }
+        }
+        stage('Flutter Build iOS') {
+            steps {
+                sh "flutter pub get"
+                sh "cd ios"
+                sh "flutter build ios --release --no-codesign"
+            }
+        }
+        stage('Fastlane iOS') {
+            steps {
+                sh "cd iOS && fastlane beta"
+            }
+        }
+        stage('Cleanup') {
+            steps {
+                sh "flutter clean"
+            }
+        }
     }
 }
