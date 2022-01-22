@@ -20,14 +20,16 @@ pipeline {
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
         }
-        stage ('Flutter Doctor') {
-            steps {
-                sh "flutter doctor -v"
-            }
-        }
+        // stage ('Flutter Doctor') {
+        //     steps {
+        //         sh "flutter doctor -v"
+        //     }
+        // }
         stage('Flutter Build iOS') {
             steps {
-                sh "cd ios && arch -x86_64 pod install --repo-update"
+                sh "flutter pub get"
+                sh "cd ios"
+                // sh "arch -x86_64 pod install --repo-update"
                 sh "flutter build ios --release --no-codesign"
             }
         }
