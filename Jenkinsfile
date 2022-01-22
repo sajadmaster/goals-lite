@@ -5,17 +5,18 @@ def xcarchive = "${appname}.xcarchive"
 pipeline {
     agent { label 'Built-In_Node' } //Change this to whatever your flutter jenkins nodes are labeled.
     environment {
-        DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer/"  //This is necessary for Fastlane to access iOS Build things.
-        PATH = "/Users/jenkins/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/Caskroom/flutter/2.5.3/flutter/bin:/usr/local/Caskroom/android-sdk/4333796//tools:/usr/local/Caskroom/android-sdk/4333796//platform-tools:/Applications/Xcode.app/Contents/Developer"
+        DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer/" 
+                PATH = "/Users/jenkins/.rbenv/shims:/opt/homebrew/Caskroom/flutter/2.8.1/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
+
+        // PATH = "/Users/jenkins/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/Caskroom/flutter/2.5.3/flutter/bin:/usr/local/Caskroom/android-sdk/4333796//tools:/usr/local/Caskroom/android-sdk/4333796//platform-tools:/Applications/Xcode.app/Contents/Developer"
     }
     stages {
         stage ('Checkout') {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
-                sh "rm -rf Goals_Lite_deploy"
                 sh "rm -rf build"
-                sh "GIT_SSH_COMMAND='ssh -i ~/.ssh/github-sm' git clone --depth 1 git@github.com-sm:sajadmaster/goals-lite.git"
+                sh "git clone --depth 1 https://github.com/sajaddmon/wholesaler-partner.git"
                 // sh "mv goalslite_build_ios ios/fastlane" //This moves the just checked out goalslite_build_ios to the fastlane directory for easier importing
             }
         }
