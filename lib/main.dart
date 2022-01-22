@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
+import 'package:goals_lite/Signin/signin_view.dart';
 import 'package:goals_lite/_shared/my_colors.dart';
 import 'package:goals_lite/models/goal.dart';
 import 'package:goals_lite/models/record.dart';
-import 'package:goals_lite/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -36,6 +36,6 @@ class MyApp extends StatelessWidget {
             button: TextStyle(fontSize: 16.0, color: black2),
           ),
         ),
-        home: DashboardPage());
+        home: SigninPage());
   }
 }
