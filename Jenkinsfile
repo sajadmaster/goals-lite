@@ -15,7 +15,6 @@ pipeline {
                 checkout scm
                 sh "rm -rf build"
                 sh "git clone --depth 1 https://github.com/sajaddmon/wholesaler-partner.git"
-                sh "mv goalslite_build_ios ios/fastlane"
             }
         }
         stage ('Flutter Doctor') {
