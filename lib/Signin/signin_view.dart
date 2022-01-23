@@ -1,16 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:goals_lite/Dashboard/dashboard_main_view.dart';
 import 'package:goals_lite/_shared/my_strings.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'signin_button/signin_button_widget.dart';
 
 class SigninPage extends StatefulWidget {
-  const SigninPage({Key? key}) : super(key: key);
+  SigninPage({Key? key}) : super(key: key);
 
   @override
   _SigninPageState createState() => _SigninPageState();
 }
 
 class _SigninPageState extends State<SigninPage> {
+  PackageInfo packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    print('sajad info.buildNumber ${info.buildNumber}');
+    setState(() {
+      packageInfo = info;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +53,7 @@ class _SigninPageState extends State<SigninPage> {
             alignment: Alignment.bottomCenter,
             child: Container(
               padding: const EdgeInsets.only(left: 24, right: 24, top: 40),
-              height: 279,
+              height: 250,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -45,6 +68,9 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                   SizedBox(height: 40),
                   SigninButtonWidget('Apple'),
+                  SizedBox(height: 20),
+                  Text('Version: ${packageInfo.version} build: ${packageInfo.buildNumber}',
+                      textAlign: TextAlign.right),
                 ],
               ),
             ),
