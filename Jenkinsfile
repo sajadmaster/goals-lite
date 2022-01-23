@@ -31,7 +31,9 @@ pipeline {
         }
         stage('Fastlane iOS') {
             steps {
-                sh "cd iOS && fastlane beta"
+                sh "cd iOS"
+                sh "fastlane env"
+                sh "fastlane beta"
             }
         }
         stage('Cleanup') {
