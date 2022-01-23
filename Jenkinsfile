@@ -1,7 +1,6 @@
 // changed file name test webhook
 def appname = "Runner"
 def xcarchive = "${appname}.xcarchive"
-// test relay
 pipeline {
     agent { label 'Built-In_Node' } //Change this to whatever your flutter jenkins nodes are labeled.
     environment {
