@@ -13,9 +13,8 @@ class SignIn {
         AppleIDAuthorizationScopes.fullName,
       ],
     ).then((credential) {
-      final credentialFirebase = OAuthProvider("apple.com").credential(
-          accessToken: credential.authorizationCode,
-          idToken: credential.identityToken);
+      final credentialFirebase = OAuthProvider("apple.com")
+          .credential(accessToken: credential.authorizationCode, idToken: credential.identityToken);
 
       auth.signInWithCredential(credentialFirebase).then((userObj) async {
         print('sajad Firebase user uid: ${userObj.user!.uid}');
